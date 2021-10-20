@@ -1,0 +1,88 @@
+---
+Test
+---
+!***> definitions
+!define REQUEST_0 { {{{Accounting-Request, ID 0
+Acct-Status-Type: Start}}} }
+
+!define REQUEST_1 { {{{Accounting-Request, ID 0
+Acct-Status-Type: Start
+User-Name: fooBar}}} }
+
+!define RESPONSE { {{{Accounting-Response, ID 0}}} }
+
+*!
+!2 Set Endpoint in RADIUS Accounting Fixture Script Mode
+Host, Port and Shared Secret are the minimum set of coordinates to set a RADIUS endpoint and can be defined as shown in the following examples.
+The Scenario Table definition mode is the suggessted one.
+
+!3 Row Definition
+Each endpoint coordinate has a dedicated row.
+|script               |radius client fixture               |
+|set host             |${RADIUS_HOST}                      |
+|set acct port        |${RADIUS_ACCT_PORT}                 |
+|set shared secret    |${RADIUS_SHARED_SECRET}             |
+|set request attribute|Acct-Status-Type|with value|Start   |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST_0}       |
+|check                |response        |${RESPONSE}        |
+
+Also optional enpoint parameters can be defined in rows.
+|script               |radius client fixture               |
+|set host             |${RADIUS_HOST}                      |
+|set acct port        |${RADIUS_ACCT_PORT}                 |
+|set shared secret    |${RADIUS_SHARED_SECRET}             |
+|set socket timeout   |4000                                |
+|set max retry        |4                                   |
+|set request attribute|Acct-Status-Type|with value|Start   |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST_0}       |
+|check                |response        |${RESPONSE}        |
+
+!3 Scenario Definition
+RADIUS endpoint can be defined grouping coordinates rows in ''Scenario Table''.
+|scenario         |my radius acct endpoint|
+|set host         |${RADIUS_HOST}         |
+|set acct port    |${RADIUS_ACCT_PORT}    |
+|set shared secret|${RADIUS_SHARED_SECRET}|
+
+|script               |radius client fixture               |
+|my radius acct endpoint                                   |
+|set request attribute|Acct-Status-Type|with value|Start   |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST_0}       |
+|check                |response        |${RESPONSE}        |
+
+!3 Inline Header Definition
+Table header accepts endopoint coordinates in the following order: ''hostname'', ''port'', ''shared secret''.
+|script               |radius client fixture|${RADIUS_HOST}|${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}|
+|set request attribute|Acct-Status-Type     |with value    |Start                                      |
+|set request attribute|User-Name            |with value    |fooBar                                     |
+|check                |send accounting      |Accounting-Response                                       |
+|check                |request              |${REQUEST_1}                                              |
+|check                |response             |${RESPONSE}                                               |
+
+Only these three main coordinates can be defined in table header. Optional enpoint parameters can be defined as shown in the Row Definition mode.
+|script               |radius client fixture|${RADIUS_HOST}|${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}|
+|set socket timeout   |4000                                                                            |
+|set max retry        |4                                                                               |
+|set request attribute|Acct-Status-Type     |with value    |Start                                      |
+|set request attribute|User-Name            |with value    |fooBar                                     |
+|check                |send accounting      |Accounting-Response                                       |
+|check                |request              |${REQUEST_1}                                              |
+|check                |response             |${RESPONSE}                                               |
+
+!3 Endpoint Map Definition
+Table header accepts endopint coordinates set via map. Endpoint related keys are the following:
+ * host
+ * sharedSecret
+ * acctPort
+ * socketTimeout
+ * maxRetry
+
+|script               |radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}}|
+|set request attribute|Acct-Status-Type     |with value|Start                                                                          |
+|set request attribute|User-Name            |with value|fooBar                                                                         |
+|check                |send accounting      |Accounting-Response                                                                       |
+|check                |request              |${REQUEST_1}                                                                              |
+|check                |response             |${RESPONSE}                                                                               |

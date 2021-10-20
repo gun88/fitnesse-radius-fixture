@@ -1,0 +1,124 @@
+---
+Test
+---
+!***> definitions
+
+!define REQUEST_1 { {{{Accounting-Request, ID 0
+Acct-Status-Type: Start
+User-Name: fooBar}}} }
+
+!define REQUEST_2 { {{{Accounting-Request, ID 0
+Acct-Status-Type: Start
+Class: A:fooBar
+Class: B:zooBar}}} }
+
+!define REQUEST_3 { {{{Accounting-Request, ID 0
+User-Name: fooBar}}} }
+
+!define REQUEST_4 { {{{Accounting-Request, ID 0
+User-Name: zooBar}}} }
+
+!define REQUEST_5 { {{{Accounting-Request, ID 0}}} }
+
+!define REQUEST_6 { {{{Accounting-Request, ID 0
+User-Name: null}}} }
+
+!define RESPONSE { {{{Accounting-Response, ID 0}}} }
+
+
+
+*!
+!2 Set Attributes in RADIUS Accounting Fixture Script Mode
+In script mode, attributes can be set or removed via rows. Default attributes can also be defined by header map.
+
+!3 Row Definition
+Single value attributes can be provided by row definition.
+|script               |radius client fixture               |
+|load radius acct endpoint                                 |
+|set request attribute|Acct-Status-Type|with value|Start   |
+|set request attribute|User-Name       |with value|fooBar  |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST_1}       |
+|check                |response        |${RESPONSE}        |
+
+To provide attributes as list, use the ''add request attribute'' method instead of ''set request attribute''.
+|script               |radius client fixture               |
+|load radius acct endpoint                                 |
+|set request attribute|Acct-Status-Type|with value|Start   |
+|add request attribute|Class           |with value|fooBar  |
+|add request attribute|Class           |with value|zooBar  |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST_2}       |
+|check                |response        |${RESPONSE}        |
+
+To update an attribute, use ''set request attribute'' method.
+|script               |radius client fixture               |
+|load radius acct endpoint                                 |
+|set request attribute|Acct-Status-Type|with value|Start   |
+|set request attribute|User-name       |with value|fooBar  |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST_3}       |
+|check                |response        |${RESPONSE}        |
+|set request attribute|User-name       |with value|zooBar  |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST_4}       |
+|check                |response        |${RESPONSE}        |
+
+
+To remove an attribute, set its value to ''null''.
+|script               |radius client fixture               |
+|load radius acct endpoint                                 |
+|set request attribute|Acct-Status-Type|with value|Start   |
+|set request attribute|User-name       |with value|fooBar  |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST_3}       |
+|check                |response        |${RESPONSE}        |
+|set request attribute|User-name       |with value|null    |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST_5}       |
+|check                |response        |${RESPONSE}        |
+|set request attribute|User-name       |with value|zooBar  |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST_4}       |
+|check                |response        |${RESPONSE}        |
+
+The null label can be customized via its dedicated method.
+
+|script               |radius client fixture               |
+|load radius acct endpoint                                 |
+|set null label       |#null#                              |
+|set request attribute|Acct-Status-Type|with value|Start   |
+|set request attribute|User-name       |with value|fooBar  |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST_3}       |
+|check                |response        |${RESPONSE}        |
+|set request attribute|User-name       |with value|#null#  |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST_5}       |
+|check                |response        |${RESPONSE}        |
+|set request attribute|User-name       |with value|null    |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST_6}       |
+|check                |response        |${RESPONSE}        |
+
+!3 Default Attribute Value Definition
+Default attributes can be set via scenario or header map.
+
+|scenario             |my base acct request             |
+|load radius acct endpoint                              |
+|set request attribute|Acct-Status-Type|with value|Start|
+
+|script               |radius client fixture              |
+|my base acct request                                     |
+|set request attribute|User-Name      |with value|fooBar  |
+|check                |send accounting|Accounting-Response|
+|check                |request        |${REQUEST_1}       |
+|check                |response       |${RESPONSE}        |
+
+
+The previous request can be also defined as the following table:
+|script               |radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, packetType:Accounting, Acct-Status-Type:Start}|
+|set request attribute|User-Name            |with value|fooBar                                                                                                                        |
+|check                |send accounting      |Accounting-Response                                                                                                                      |
+|check                |request              |${REQUEST_1}                                                                                                                             |
+|check                |response             |${RESPONSE}                                                                                                                              |

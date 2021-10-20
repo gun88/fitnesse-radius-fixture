@@ -1,0 +1,48 @@
+---
+Test
+---
+!***> definitions
+
+!define REQUEST { {{{Accounting-Request, ID 0
+Acct-Status-Type: Start
+Custom-String: fooBar}}} }
+
+!define RESPONSE { {{{Accounting-Response, ID 0}}} }
+
+*!!2 Extend Dictionary in RADIUS Accounting Fixture Script Mode
+Following examples show how to extend Dictionary in RADIUS Accounting Communication. The suggested method is ''Scenario Table''.
+
+!3 Extend Dictionary in Table Header
+RADIUS Dictionary can be extended providing a custom dictionary into the table header constructor map.
+|script               |radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, dictionary:${CUSTOM_DICTIONARY}}|
+|set request attribute|Acct-Status-Type     |with value|Start                                                                                                           |
+|set request attribute|Custom-String        |with value|fooBar                                                                                                          |
+|check                |send accounting      |Accounting-Response                                                                                                        |
+|check                |request              |${REQUEST}                                                                                                                 |
+|check                |response             |${RESPONSE}                                                                                                                |
+
+!3 Extend Dictionary in Table Row
+RADIUS Dictionary can be extended providing a custom dictionary into the ''extend dictionary'' table row.
+|script               |radius client fixture               |
+|load radius acct endpoint                                 |
+|extend dictionary    |${CUSTOM_DICTIONARY}                |
+|set request attribute|Acct-Status-Type|with value|Start   |
+|set request attribute|Custom-String   |with value|fooBar  |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST}         |
+|check                |response        |${RESPONSE}        |
+
+!3 Extend Dictionary in ''Scenario Table''
+RADIUS Dictionary can be extended providing a custom dictionary into the ''dictionary'' table row.
+
+|scenario         |my acct request with dictionary|
+|load radius acct endpoint                        |
+|extend dictionary|${CUSTOM_DICTIONARY}           |
+
+|script               |radius client fixture               |
+|my acct request with dictionary                           |
+|set request attribute|Acct-Status-Type|with value|Start   |
+|set request attribute|Custom-String   |with value|fooBar  |
+|check                |send accounting |Accounting-Response|
+|check                |request         |${REQUEST}         |
+|check                |response        |${RESPONSE}        |
