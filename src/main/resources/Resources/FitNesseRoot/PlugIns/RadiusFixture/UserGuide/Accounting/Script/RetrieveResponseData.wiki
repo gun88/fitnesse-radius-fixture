@@ -1,0 +1,60 @@
+---
+Test
+---
+!***> definitions
+!define RESPONSE_0 { {{{Accounting-Response, ID 111
+Proxy-State: 0x0012
+Reply-Message: Accounting Done!}}} }
+
+!define RESPONSE_1 { {{{Accounting-Response, ID 222
+Proxy-State: 0x0014
+Reply-Message: Accounting Done!
+Reply-Message: event: Start}}} }
+
+*!!2 Get Data From RADIUS Accounting Response Script Mode
+Following examples show how to retrieve data from responses.
+
+NOTE: RADIUS Mock Server returns customized ''Reply-Message'' when ''Callback-Id'' is set to ''simple-reply'' or ''multi-reply''.
+
+!3 Single Data
+Retrieve single data from RADIUS Accounting Response.
+|script               |radius client fixture                            |
+|load radius acct endpoint                                              |
+|set request id       |111                                              |
+|set request attribute|Acct-Status-Type  |with value   |Start           |
+|set request attribute|Callback-Id       |with value   |simple-reply    |
+|set request attribute|Proxy-State       |with value   |0x0012          |
+|check                |send accounting   |Accounting-Response           |
+|check                |response id       |111                           |
+|check                |response attribute|Proxy-State  |0x0012          |
+|check                |response attribute|Reply-Message|Accounting Done!|
+|check                |response          |${RESPONSE_0}                 |
+
+!3 Multiple Data in Single Field
+When response attribute id refer to a list, values are concatenated togheter and splitted by comma.
+|script               |radius client fixture                                          |
+|load radius acct endpoint                                                            |
+|set request id       |222                                                            |
+|set request attribute|Acct-Status-Type  |with value   |Start                         |
+|set request attribute|Callback-Id       |with value   |multi-reply                   |
+|set request attribute|Proxy-State       |with value   |0x0014                        |
+|check                |send accounting   |Accounting-Response                         |
+|check                |response id       |222                                         |
+|check                |response attribute|Proxy-State  |0x0014                        |
+|check                |response attribute|Reply-Message|Accounting Done!, event: Start|
+|check                |response          |${RESPONSE_1}                               |
+
+!3 Multiple Data in Multiple Field
+When response attribute id refer to a list, values values can be retrieved one by one with array notation header.
+|script               |radius client fixture                                 |
+|load radius acct endpoint                                                   |
+|set request id       |222                                                   |
+|set request attribute|Acct-Status-Type  |with value   |Start                |
+|set request attribute|Callback-Id       |with value   |multi-reply          |
+|set request attribute|Proxy-State       |with value   |0x0014               |
+|check                |send accounting   |Accounting-Response                |
+|check                |response id       |222                                |
+|check                |response attribute|Proxy-State  |0x0014               |
+|check                |response attribute|Reply-Message|at|0|Accounting Done!|
+|check                |response attribute|Reply-Message|at|1|event: Start    |
+|check                |response          |${RESPONSE_1}                      |

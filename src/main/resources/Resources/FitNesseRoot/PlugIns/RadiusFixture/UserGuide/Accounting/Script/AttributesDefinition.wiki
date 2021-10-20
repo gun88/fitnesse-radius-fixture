@@ -45,61 +45,58 @@ To provide attributes as list, use the ''add request attribute'' method instead 
 |script               |radius client fixture               |
 |load radius acct endpoint                                 |
 |set request attribute|Acct-Status-Type|with value|Start   |
-|add request attribute|Class           |with value|fooBar  |
-|add request attribute|Class           |with value|zooBar  |
+|add request attribute|Class           |with value|A:fooBar|
+|add request attribute|Class           |with value|B:zooBar|
 |check                |send accounting |Accounting-Response|
 |check                |request         |${REQUEST_2}       |
 |check                |response        |${RESPONSE}        |
 
 To update an attribute, use ''set request attribute'' method.
-|script               |radius client fixture               |
-|load radius acct endpoint                                 |
-|set request attribute|Acct-Status-Type|with value|Start   |
-|set request attribute|User-name       |with value|fooBar  |
-|check                |send accounting |Accounting-Response|
-|check                |request         |${REQUEST_3}       |
-|check                |response        |${RESPONSE}        |
-|set request attribute|User-name       |with value|zooBar  |
-|check                |send accounting |Accounting-Response|
-|check                |request         |${REQUEST_4}       |
-|check                |response        |${RESPONSE}        |
+|script               |radius client fixture              |
+|load radius acct endpoint                                |
+|set request attribute|User-Name      |with value|fooBar  |
+|check                |send accounting|Accounting-Response|
+|check                |request        |${REQUEST_3}       |
+|check                |response       |${RESPONSE}        |
+|set request attribute|User-Name      |with value|zooBar  |
+|check                |send accounting|Accounting-Response|
+|check                |request        |${REQUEST_4}       |
+|check                |response       |${RESPONSE}        |
 
 
 To remove an attribute, set its value to ''null''.
-|script               |radius client fixture               |
-|load radius acct endpoint                                 |
-|set request attribute|Acct-Status-Type|with value|Start   |
-|set request attribute|User-name       |with value|fooBar  |
-|check                |send accounting |Accounting-Response|
-|check                |request         |${REQUEST_3}       |
-|check                |response        |${RESPONSE}        |
-|set request attribute|User-name       |with value|null    |
-|check                |send accounting |Accounting-Response|
-|check                |request         |${REQUEST_5}       |
-|check                |response        |${RESPONSE}        |
-|set request attribute|User-name       |with value|zooBar  |
-|check                |send accounting |Accounting-Response|
-|check                |request         |${REQUEST_4}       |
-|check                |response        |${RESPONSE}        |
+|script               |radius client fixture              |
+|load radius acct endpoint                                |
+|set request attribute|User-Name      |with value|fooBar  |
+|check                |send accounting|Accounting-Response|
+|check                |request        |${REQUEST_3}       |
+|check                |response       |${RESPONSE}        |
+|set request attribute|User-Name      |with value|null    |
+|check                |send accounting|Accounting-Response|
+|check                |request        |${REQUEST_5}       |
+|check                |response       |${RESPONSE}        |
+|set request attribute|User-Name      |with value|zooBar  |
+|check                |send accounting|Accounting-Response|
+|check                |request        |${REQUEST_4}       |
+|check                |response       |${RESPONSE}        |
 
 The null label can be customized via its dedicated method.
 
-|script               |radius client fixture               |
-|load radius acct endpoint                                 |
-|set null label       |#null#                              |
-|set request attribute|Acct-Status-Type|with value|Start   |
-|set request attribute|User-name       |with value|fooBar  |
-|check                |send accounting |Accounting-Response|
-|check                |request         |${REQUEST_3}       |
-|check                |response        |${RESPONSE}        |
-|set request attribute|User-name       |with value|#null#  |
-|check                |send accounting |Accounting-Response|
-|check                |request         |${REQUEST_5}       |
-|check                |response        |${RESPONSE}        |
-|set request attribute|User-name       |with value|null    |
-|check                |send accounting |Accounting-Response|
-|check                |request         |${REQUEST_6}       |
-|check                |response        |${RESPONSE}        |
+|script               |radius client fixture              |
+|load radius acct endpoint                                |
+|set null label       |#null#                             |
+|set request attribute|User-Name      |with value|fooBar  |
+|check                |send accounting|Accounting-Response|
+|check                |request        |${REQUEST_3}       |
+|check                |response       |${RESPONSE}        |
+|set request attribute|User-Name      |with value|#null#  |
+|check                |send accounting|Accounting-Response|
+|check                |request        |${REQUEST_5}       |
+|check                |response       |${RESPONSE}        |
+|set request attribute|User-Name      |with value|null    |
+|check                |send accounting|Accounting-Response|
+|check                |request        |${REQUEST_6}       |
+|check                |response       |${RESPONSE}        |
 
 !3 Default Attribute Value Definition
 Default attributes can be set via scenario or header map.

@@ -28,11 +28,11 @@ Multiple request can be sent in script mode paying attention to updete/remove at
 |script               |radius client fixture               |
 |load radius acct endpoint                                 |
 |set request attribute|Acct-Status-Type|with value|Start   |
-|set request attribute|Custom-String   |with value|fooBar  |
+|set request attribute|User-Name       |with value|fooBar  |
 |check                |send accounting |Accounting-Response|
 |check                |request         |${REQUEST_0}       |
 |check                |response        |${RESPONSE}        |
-|set request attribute|Custom-String   |with value|zooBar  |
+|set request attribute|User-Name       |with value|zooBar  |
 |check                |send accounting |Accounting-Response|
 |check                |request         |${REQUEST_2}       |
 |check                |response        |${RESPONSE}        |
@@ -42,15 +42,36 @@ To remove an attribute, provide ''null'' as value.
 |script               |radius client fixture               |
 |load radius acct endpoint                                 |
 |set request attribute|Acct-Status-Type|with value|Start   |
-|set request attribute|Custom-String   |with value|fooBar  |
+|set request attribute|User-Name       |with value|fooBar  |
 |check                |send accounting |Accounting-Response|
 |check                |request         |${REQUEST_0}       |
 |check                |response        |${RESPONSE}        |
-|set request attribute|Custom-String   |with value|null    |
+|set request attribute|User-Name       |with value|null    |
 |check                |send accounting |Accounting-Response|
 |check                |request         |${REQUEST_1}       |
 |check                |response        |${RESPONSE}        |
-|set request attribute|Custom-String   |with value|zooBar  |
+|set request attribute|User-Name       |with value|zooBar  |
 |check                |send accounting |Accounting-Response|
 |check                |request         |${REQUEST_2}       |
 |check                |response        |${RESPONSE}        |
+
+!3 Multiple Accounting Message
+Following example shows multiple RADIUS Accounting communication. However, for multiple communication, table mode is suggested.
+
+|script               |radius client fixture                                 |
+|set host             |${RADIUS_HOST}                                        |
+|set acct port        |${RADIUS_ACCT_PORT}                                   |
+|set shared secret    |${RADIUS_SHARED_SECRET}                               |
+|set request attribute|Callback-Id       |with value   |dump-acct-status-type|
+|note                 |sending start packet                                  |
+|set request attribute|Acct-Status-Type  |with value   |Start                |
+|check                |send accounting   |Accounting-Response                |
+|check                |response attribute|Reply-Message|event: Start         |
+|note                 |sending alive packet                                  |
+|set request attribute|Acct-Status-Type  |with value   |Alive                |
+|check                |send accounting   |Accounting-Response                |
+|check                |response attribute|Reply-Message|event: Alive         |
+|note                 |sending stop packet                                   |
+|set request attribute|Acct-Status-Type  |with value   |Stop                 |
+|check                |send accounting   |Accounting-Response                |
+|check                |response attribute|Reply-Message|event: Stop          |
