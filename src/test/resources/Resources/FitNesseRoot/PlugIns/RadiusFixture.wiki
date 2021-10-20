@@ -1,0 +1,4 @@
+!contents -R2 -g -p -f -h
+!note Release v0.0.0
+!path ${tinyRadius.jar.path}
+!path ${radiusFixture.jar.path}
