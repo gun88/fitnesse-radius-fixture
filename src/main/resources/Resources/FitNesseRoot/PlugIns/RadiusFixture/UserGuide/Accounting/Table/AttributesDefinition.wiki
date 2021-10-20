@@ -31,34 +31,34 @@ In table mode, attributes can be set or removed via columns. Default attributes 
 
 !3 Column Definition
 Single value attributes can be provided by column definition.
-|ddt        :radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}}|
-|packet type|Acct-Status-Type     |User-Name|request?    |response?                                                          |
-|Accounting |Start                |fooBar   |${REQUEST_1}|${RESPONSE}                                                        |
+|ddt        :radius client fixture|${RADIUS_HOST}|${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}|
+|packet type|Acct-Status-Type     |User-Name     |request?           |response?              |
+|Accounting |Start                |fooBar        |${REQUEST_1}       |${RESPONSE}            |
 
 To provide attributes as list, use the ''array push notation'' (attribute name followed by open and closed brackets - Attribute-Name[]).
-|ddt        :radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}}|
-|packet type|Acct-Status-Type     |Class[] |Class[] |request?    |response?                                                  |
-|Accounting |Start                |A:fooBar|B:zooBar|${REQUEST_2}|${RESPONSE}                                                |
+|ddt        :radius client fixture|${RADIUS_HOST}|${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET} |
+|packet type|Acct-Status-Type     |Class[]       |Class[]            |request?    |response?  |
+|Accounting |Start                |A:fooBar      |B:zooBar           |${REQUEST_2}|${RESPONSE}|
 
 To update an attribute, just change value in lines.
-|ddt      :radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, packetType:Accounting}|
-|User-Name|request?             |response?                                                                                                        |
-|fooBar   |${REQUEST_3}         |${RESPONSE}                                                                                                      |
-|zooBar   |${REQUEST_4}         |${RESPONSE}                                                                                                      |
+|ddt        :radius client fixture|${RADIUS_HOST}|${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}|
+|packet type|User-Name            |request?      |response?                                  |
+|Accounting |fooBar               |${REQUEST_3}  |${RESPONSE}                                |
+|Accounting |zooBar               |${REQUEST_4}  |${RESPONSE}                                |
 
 To remove an attribute, set its value to ''null''.
-|ddt      :radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, packetType:Accounting}|
-|User-Name|request?             |response?                                                                                                        |
-|fooBar   |${REQUEST_3}         |${RESPONSE}                                                                                                      |
-|null     |${REQUEST_5}         |${RESPONSE}                                                                                                      |
-|zooBar   |${REQUEST_4}         |${RESPONSE}                                                                                                      |
+|ddt        :radius client fixture|${RADIUS_HOST}|${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}|
+|packet type|User-Name            |request?      |response?                                  |
+|Accounting |fooBar               |${REQUEST_3}  |${RESPONSE}                                |
+|Accounting |null                 |${REQUEST_5}  |${RESPONSE}                                |
+|Accounting |zooBar               |${REQUEST_4}  |${RESPONSE}                                |
 
 The null label can be customized via map key ''nullLabel''.
-|ddt      :radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, packetType:Accounting, nullLabel:#null#}|
-|User-Name|request?             |response?                                                                                                                          |
-|fooBar   |${REQUEST_3}         |${RESPONSE}                                                                                                                        |
-|#null#   |${REQUEST_5}         |${RESPONSE}                                                                                                                        |
-|null     |${REQUEST_6}         |${RESPONSE}                                                                                                                        |
+|ddt        :radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, nullLabel:#null#}|
+|packet type|User-Name            |request?    |response?                                                                                      |
+|Accounting |fooBar               |${REQUEST_3}|${RESPONSE}                                                                                    |
+|Accounting |#null#               |${REQUEST_5}|${RESPONSE}                                                                                    |
+|Accounting |null                 |${REQUEST_6}|${RESPONSE}                                                                                    |
 
 !3 Default Attribute Value Definition
 Default attributes can be set via header map. Each table row will inherit these attributes.

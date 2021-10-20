@@ -37,9 +37,3 @@ To remove an attribute, provide ''null'' as value.
 |fooBar   |${REQUEST_0}         |${RESPONSE}                                                                                                                              |
 |null     |${REQUEST_1}         |${RESPONSE}                                                                                                                              |
 |zooBar   |${REQUEST_2}         |${RESPONSE}                                                                                                                              |
-
-!3 Attribute List
-To provide attributes al list, use the ''array push notation'' (attribute name followed by opend and closed brackets - Attribute-Name[]).
-|ddt     :radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, packetType:Accounting, Acct-Status-Type:Start}|
-|Class[] |Class[]              |request?    |response?                                                                                                                   |
-|A:fooBar|B:zooBar             |${REQUEST_3}|${RESPONSE}                                                                                                                 |
