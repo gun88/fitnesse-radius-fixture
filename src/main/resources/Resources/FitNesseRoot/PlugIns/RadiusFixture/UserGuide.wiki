@@ -1,0 +1,14 @@
+---
+Suite
+---
+!1 !-RadiusFixture-! User Guide
+'''!-RadiusFixture-!''' (fitnesse-radius-fixture) is a FitNesse slim fixture for RADIUS protocol communications
+
+!2 Quick Start
+To start using !-RadiusFixture-!, just put the release jar into the FitNesse plugins directory and restart FitNesse Web Server, then you will able to run UserGuide suite's tests.
+Go to the [[Installation][UserGuide.Installation]] page to see more details and different installation modes.
+Go to [[!-CreateYourFirstTest-!][UserGuide.SshTestCreation.CreateYourFirstTest]] to start writing test using !-RadiusFixture-!.
+
+NOTE: in user guide test, a connection to a mocked RADIUS server is used.
+
+!contents -R3 -g -p -f -h

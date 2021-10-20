@@ -1,0 +1,50 @@
+---
+Test
+---
+!***> definitions
+!define REQUEST_0 { {{{Accounting-Request, ID 0
+Acct-Status-Type: Start}}} }
+
+!define REQUEST_1 { {{{Accounting-Request, ID 0
+Acct-Status-Type: Start
+User-Name: fooBar}}} }
+
+!define RESPONSE { {{{Accounting-Response, ID 0}}} }
+
+*!
+!2 Set Endpoint in RADIUS Accounting Fixture Table Mode
+Host, Port and Shared Secret are the minimum set of coordinates to set a RADIUS endpoint and can be defined as shown in the following examples.
+
+!3 Column Definition
+Each endpoint coordinate has a dedicated column.
+|DDT           :radius client fixture                                                                            |
+|host          |acct port          |shared secret          |packet type|Acct-Status-Type|request?    |response?  |
+|${RADIUS_HOST}|${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}|Accounting |Start           |${REQUEST_0}|${RESPONSE}|
+
+Also optional enpoint parameters can be defined in columns.
+|ddt           :radius client fixture                                                                                                     |
+|host          |acct port          |shared secret          |socket timeout|max retry|packet type|Acct-Status-Type|request?    |response?  |
+|${RADIUS_HOST}|${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}|4000          |4        |Accounting |Start           |${REQUEST_0}|${RESPONSE}|
+
+!3 Inline Header Definition
+Table header accepts endopoint coordinates in the following order: ''hostname'', ''port'', ''shared secret''.
+|ddt        :radius client fixture|${RADIUS_HOST}|${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}|
+|packet type|Acct-Status-Type     |User-Name     |request?           |response?              |
+|Accounting |Start                |fooBar        |${REQUEST_1}       |${RESPONSE}            |
+
+Only these three main coordinates can be defined in table header. Optional enpoint parameters can be defined as shown in the Colum Definition mode.
+|ddt           :radius client fixture|${RADIUS_HOST}|${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}           |
+|socket timeout|max retry            |packet type   |Acct-Status-Type   |User-Name|request?    |response?  |
+|4000          |4                    |Accounting    |Start              |fooBar   |${REQUEST_1}|${RESPONSE}|
+
+!3 Endpoint Map Definition
+Table header accepts endopint coordinates set via map. Endpoint related keys are the following:
+ * host
+ * sharedSecret
+ * acctPort
+ * socketTimeout
+ * maxRetry
+
+|ddt        :radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}}|
+|packet type|Acct-Status-Type     |User-Name|request?    |response?                                                          |
+|Accounting |Start                |fooBar   |${REQUEST_1}|${RESPONSE}                                                        |

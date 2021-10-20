@@ -1,0 +1,7 @@
+!contents -R2 -g -p -f -h
+!***> definitions
+!note Release v${version}
+!path ${tinyRadius.jar.path}
+!path ${radiusFixture.jar.path}
+!define TEST_SYSTEM {slim}
+*!

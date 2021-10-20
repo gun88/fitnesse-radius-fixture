@@ -1,0 +1,43 @@
+|import                                  |
+|com.github.gun88.fitnesse.fixture.radius|
+
+!***> definitions
+!define RADIUS_HOST {127.0.0.1}
+!define RADIUS_SHARED_SECRET {foo-bar}
+!define RADIUS_ACCT_PORT {2888}
+!define RADIUS_AUTH_PORT {2889}
+!define RADIUS_SOCKET_TIMEOUT {3000}
+*!
+
+!***> Custom Dictionary
+!define CUSTOM_DICTIONARY { {{{
+
+ATTRIBUTE   Custom-String       201     string
+ATTRIBUTE   Custom-Octets       202     octets
+ATTRIBUTE   Custom-Integer      203     integer
+ATTRIBUTE   Custom-Date         204     date
+ATTRIBUTE   Custom-Ipaddr       205     ipaddr
+ATTRIBUTE   Custom-Ipv6addr     206     ipv6addr
+ATTRIBUTE   Custom-Ipv6prefix   207     ipv6prefix
+
+# Wi-Fi Alliance - Wireless ISP Roaming - Best Current Practices v1,
+# Feb 2003, p 14
+# http://www.weca.net/OpenSection/downloads/WISPr_V1.0.pdf
+
+# https://www.iana.org/assignments/enterprise-numbers/enterprise-numbers
+
+VENDOR          3000    CutomVendor
+
+VENDORATTR      3000    Custom-Vendor-String    1   string
+VENDORATTR      3000    Custom-Vendor-Integer   2   integer
+
+}}} }
+
+*!
+
+|script      |radius server mock               |
+|acct port   |${RADIUS_ACCT_PORT}              |
+|auth port   |${RADIUS_AUTH_PORT}              |
+|sharedSecret|${RADIUS_SHARED_SECRET}          |
+|add user    |user001|with password|password001|
+|show        |start server                     |

@@ -1,0 +1,45 @@
+---
+Test
+---
+!***> definitions
+
+!define REQUEST_0 { {{{Accounting-Request, ID 0
+Acct-Status-Type: Start
+User-Name: fooBar}}} }
+
+!define REQUEST_1 { {{{Accounting-Request, ID 0
+Acct-Status-Type: Start}}} }
+
+!define REQUEST_2 { {{{Accounting-Request, ID 0
+Acct-Status-Type: Start
+User-Name: zooBar}}} }
+
+!define REQUEST_3 { {{{Accounting-Request, ID 0
+Acct-Status-Type: Start
+Class: A:fooBar
+Class: B:zooBar}}} }
+
+!define RESPONSE { {{{Accounting-Response, ID 0}}} }
+
+*!
+!2 Multiple Requests in RADIUS Accounting Fixture Table Mode
+Multiple request can be easily sent in table mode.
+
+|ddt      :radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, packetType:Accounting, Acct-Status-Type:Start}|
+|User-Name|request?             |response?                                                                                                                                |
+|fooBar   |${REQUEST_0}         |${RESPONSE}                                                                                                                              |
+|zooBar   |${REQUEST_2}         |${RESPONSE}                                                                                                                              |
+
+!3 Remove Attribute
+To remove an attribute, provide ''null'' as value.
+|ddt      :radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, packetType:Accounting, Acct-Status-Type:Start}|
+|User-Name|request?             |response?                                                                                                                                |
+|fooBar   |${REQUEST_0}         |${RESPONSE}                                                                                                                              |
+|null     |${REQUEST_1}         |${RESPONSE}                                                                                                                              |
+|zooBar   |${REQUEST_2}         |${RESPONSE}                                                                                                                              |
+
+!3 Attribute List
+To provide attributes al list, use the ''array push notation'' (attribute name followed by opend and closed brackets - Attribute-Name[]).
+|ddt     :radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, packetType:Accounting, Acct-Status-Type:Start}|
+|Class[] |Class[]              |request?    |response?                                                                                                                   |
+|A:fooBar|B:zooBar             |${REQUEST_3}|${RESPONSE}                                                                                                                 |
