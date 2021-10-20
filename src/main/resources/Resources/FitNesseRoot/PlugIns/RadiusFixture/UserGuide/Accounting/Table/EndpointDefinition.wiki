@@ -17,7 +17,7 @@ Host, Port and Shared Secret are the minimum set of coordinates to set a RADIUS 
 
 !3 Column Definition
 Each endpoint coordinate has a dedicated column.
-|DDT           :radius client fixture                                                                            |
+|ddt           :radius client fixture                                                                            |
 |host          |acct port          |shared secret          |packet type|Acct-Status-Type|request?    |response?  |
 |${RADIUS_HOST}|${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}|Accounting |Start           |${REQUEST_0}|${RESPONSE}|
 
