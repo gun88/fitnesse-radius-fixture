@@ -14,11 +14,6 @@ Acct-Status-Type: Start}}} }
 Acct-Status-Type: Start
 User-Name: zooBar}}} }
 
-!define REQUEST_3 { {{{Accounting-Request, ID 0
-Acct-Status-Type: Start
-Class: A:fooBar
-Class: B:zooBar}}} }
-
 !define RESPONSE { {{{Accounting-Response, ID 0}}} }
 
 *!
