@@ -6,7 +6,7 @@
 !define RADIUS_SHARED_SECRET {foo-bar}
 !define RADIUS_ACCT_PORT {2888}
 !define RADIUS_AUTH_PORT {2889}
-!define RADIUS_SOCKET_TIMEOUT {3000}
+!define RADIUS_SOCKET_TIMEOUT {500}
 *!
 
 !***> Custom Dictionary
@@ -35,9 +35,22 @@ VENDORATTR      3000    Custom-Vendor-Integer   2   integer
 
 *!
 
-|script      |radius server mock               |
-|acct port   |${RADIUS_ACCT_PORT}              |
-|auth port   |${RADIUS_AUTH_PORT}              |
-|sharedSecret|${RADIUS_SHARED_SECRET}          |
-|add user    |user001|with password|password001|
-|show        |start server                     |
+|script      |radius server mock                                  |
+|acct port   |${RADIUS_ACCT_PORT}                                 |
+|auth port   |${RADIUS_AUTH_PORT}                                 |
+|sharedSecret|${RADIUS_SHARED_SECRET}                             |
+|add user    |admin  |with password|password000|and role|admin    |
+|add user    |user001|with password|password001|and role|red_write|
+|add user    |anon   |with password|no-password|and role|anon     |
+|show        |start server                                        |
+
+
+|scenario         |load radius acct endpoint|
+|set host         |${RADIUS_HOST}           |
+|set acct port    |${RADIUS_ACCT_PORT}      |
+|set shared secret|${RADIUS_SHARED_SECRET}  |
+
+|scenario         |load radius auth endpoint|
+|set host         |${RADIUS_HOST}           |
+|set auth port    |${RADIUS_AUTH_PORT}      |
+|set shared secret|${RADIUS_SHARED_SECRET}  |
