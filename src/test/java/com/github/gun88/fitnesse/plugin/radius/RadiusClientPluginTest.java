@@ -10,7 +10,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.tinyradius.util.RadiusClient;
-import util.WikiFileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +29,10 @@ public class RadiusClientPluginTest {
 
     @Rule
     public TemporaryFolder temporaryFolder = new TemporaryFolder();
+
+    private static boolean contains(File file, String line) throws IOException {
+        return Files.readAllLines(file.toPath()).stream().anyMatch(x -> x.equals(line));
+    }
 
     @Test
     public void getProperty_shouldUseSystemProperties_whenRegisterTestRunFactoriesNotCalled() {
@@ -101,8 +104,8 @@ public class RadiusClientPluginTest {
         assertEquals(2, Files.list(plugins.toPath()).count());
         assertTrue(Files.exists(Paths.get(plugins.getAbsolutePath(), "RadiusFixture")));
         assertTrue(Files.isDirectory(Paths.get(plugins.getAbsolutePath(), "RadiusFixture")));
-        assertTrue(WikiFileUtils.contains(mainWikiFile, "!path " + dependencyPath.toAbsolutePath()));
-        assertTrue(WikiFileUtils.contains(mainWikiFile, "!path " + mainFixturePath.toAbsolutePath()));
+        assertTrue(contains(mainWikiFile, "!path " + dependencyPath.toAbsolutePath()));
+        assertTrue(contains(mainWikiFile, "!path " + mainFixturePath.toAbsolutePath()));
     }
 
     @Test
@@ -122,8 +125,8 @@ public class RadiusClientPluginTest {
         assertEquals(2, Files.list(plugins.toPath()).count());
         assertTrue(Files.exists(Paths.get(plugins.getAbsolutePath(), "RadiusFixture")));
         assertTrue(Files.isDirectory(Paths.get(plugins.getAbsolutePath(), "RadiusFixture")));
-        assertTrue(WikiFileUtils.contains(mainWikiFile, "!path " + dependencyPath.toAbsolutePath()));
-        assertTrue(WikiFileUtils.contains(mainWikiFile, "!path " + mainFixturePath.toAbsolutePath()));
+        assertTrue(contains(mainWikiFile, "!path " + dependencyPath.toAbsolutePath()));
+        assertTrue(contains(mainWikiFile, "!path " + mainFixturePath.toAbsolutePath()));
     }
 
 
