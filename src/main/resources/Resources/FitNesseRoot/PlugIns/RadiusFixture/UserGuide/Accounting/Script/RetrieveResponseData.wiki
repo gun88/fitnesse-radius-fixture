@@ -45,16 +45,31 @@ When response attribute id refer to a list, values are concatenated togheter and
 |check                |response          |${RESPONSE_1}                               |
 
 !3 Multiple Data in Multiple Field
-When response attribute id refer to a list, values values can be retrieved one by one with array notation header.
-|script               |radius client fixture                                 |
-|load radius acct endpoint                                                   |
-|set request id       |222                                                   |
-|set request attribute|Acct-Status-Type  |with value   |Start                |
-|set request attribute|Callback-Id       |with value   |multi-reply          |
-|set request attribute|Proxy-State       |with value   |0x0014               |
-|check                |send accounting   |Accounting-Response                |
-|check                |response id       |222                                |
-|check                |response attribute|Proxy-State  |0x0014               |
-|check                |response attribute|Reply-Message|at|0|Accounting Done!|
-|check                |response attribute|Reply-Message|at|1|event: Start    |
-|check                |response          |${RESPONSE_1}                      |
+When response attribute id refer to a list, values values can be retrieved one by one with method ''response attribute at''.
+|script               |radius client fixture                                       |
+|load radius acct endpoint                                                         |
+|set request id       |222                                                         |
+|set request attribute|Acct-Status-Type  |with value   |Start                      |
+|set request attribute|Callback-Id       |with value   |multi-reply                |
+|set request attribute|Proxy-State       |with value   |0x0014                     |
+|check                |send accounting   |Accounting-Response                      |
+|check                |response id       |222                                      |
+|check                |response attribute|Proxy-State  |0x0014                     |
+|check                |response attribute|Reply-Message|at      |0|Accounting Done!|
+|check                |response attribute|Reply-Message|at      |1|event: Start    |
+|check                |response          |${RESPONSE_1}                            |
+
+When attribute id refer to a list and order is not known, values can be checked one by one with method ''response attribute contains''.
+|script               |radius client fixture                                       |
+|load radius acct endpoint                                                         |
+|set request id       |222                                                         |
+|set request attribute|Acct-Status-Type  |with value   |Start                      |
+|set request attribute|Callback-Id       |with value   |multi-reply                |
+|set request attribute|Proxy-State       |with value   |0x0014                     |
+|check                |send accounting   |Accounting-Response                      |
+|check                |response id       |222                                      |
+|check                |response attribute|Proxy-State  |0x0014                     |
+|ensure               |response attribute|Reply-Message|contains|Accounting Done!  |
+|ensure               |response attribute|Reply-Message|contains|event: Start      |
+|check                |response          |${RESPONSE_1}                            |
+

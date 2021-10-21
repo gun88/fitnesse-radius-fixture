@@ -4,7 +4,8 @@ Test
 !***> definitions
 !define REQUEST { {{{Accounting-Request, ID 0
 Acct-Session-Id: acct-001
-User-Name: fooBar00}}} }
+User-Name: fooBar00
+Custom-String: my-custom-string}}} }
 
 !define RESPONSE { {{{Accounting-Response, ID 0}}} }
 
@@ -19,68 +20,72 @@ Scenario Tables are usefeful to build well-formed RADIUS Fixture Acceptance Test
 !3 RADIUS Dictionary Scenario
 Scenarios can be useful for reusable RADIUS Dictionary definitions
 
-|scenario         |load dictionary     |
+|scenario         |load acct dictionary|
 |extend dictionary|${CUSTOM_DICTIONARY}|
 
-|script               |radius client fixture              |
-|load dictionary                                          |
-|set host             |${RADIUS_HOST}                     |
-|set acct port        |${RADIUS_ACCT_PORT}                |
-|set shared secret    |${RADIUS_SHARED_SECRET}            |
-|set request attribute|Acct-Session-Id|with value|acct-001|
-|set request attribute|User-Name      |with value|fooBar00|
-|check                |send accounting|Accounting-Response|
-|check                |request        |${REQUEST}         |
-|check                |response       |${RESPONSE}        |
-|check                |response id    |0                  |
+|script               |radius client fixture                      |
+|load acct dictionary                                             |
+|set host             |${RADIUS_HOST}                             |
+|set acct port        |${RADIUS_ACCT_PORT}                        |
+|set shared secret    |${RADIUS_SHARED_SECRET}                    |
+|set request attribute|Acct-Session-Id|with value|acct-001        |
+|set request attribute|User-Name      |with value|fooBar00        |
+|set request attribute|Custom-String  |with value|my-custom-string|
+|check                |send accounting|Accounting-Response        |
+|check                |request        |${REQUEST}                 |
+|check                |response       |${RESPONSE}                |
+|check                |response id    |0                          |
 
 !3 RADIUS Endpoint Scenario
 Scenarios can be useful for reusable RADIUS Endpoint definitions
 
-|scenario         |load endpoint scenario |
-|load dictionary                          |
-|set host         |${RADIUS_HOST}         |
-|set acct port    |${RADIUS_ACCT_PORT}    |
-|set shared secret|${RADIUS_SHARED_SECRET}|
+|scenario         |load acct endpoint scenario|
+|load acct dictionary                         |
+|set host         |${RADIUS_HOST}             |
+|set acct port    |${RADIUS_ACCT_PORT}        |
+|set shared secret|${RADIUS_SHARED_SECRET}    |
 
-|script               |radius client fixture              |
-|load endpoint scenario                                   |
-|set request attribute|Acct-Session-Id|with value|acct-001|
-|set request attribute|User-Name      |with value|fooBar00|
-|check                |send accounting|Accounting-Response|
-|check                |request        |${REQUEST}         |
-|check                |response       |${RESPONSE}        |
-|check                |response id    |0                  |
+|script               |radius client fixture                      |
+|load acct endpoint scenario                                      |
+|set request attribute|Acct-Session-Id|with value|acct-001        |
+|set request attribute|User-Name      |with value|fooBar00        |
+|set request attribute|Custom-String  |with value|my-custom-string|
+|check                |send accounting|Accounting-Response        |
+|check                |request        |${REQUEST}                 |
+|check                |response       |${RESPONSE}                |
+|check                |response id    |0                          |
 
 !3 RADIUS Base Request Scenario
 Scenarios can be useful for reusable RADIUS Base Request definitions
 
-|scenario             |load base request                  |
-|load endpoint scenario                                   |
+|scenario             |load acct base request             |
+|load acct endpoint scenario                              |
 |set request attribute|Acct-Session-Id|with value|acct-001|
 
-|script               |radius client fixture              |
-|load base request                                        |
-|set request attribute|User-Name      |with value|fooBar00|
-|check                |send accounting|Accounting-Response|
-|check                |request        |${REQUEST}         |
-|check                |response       |${RESPONSE}        |
-|check                |response id    |0                  |
+|script               |radius client fixture                      |
+|load acct base request                                           |
+|set request attribute|User-Name      |with value|fooBar00        |
+|set request attribute|Custom-String  |with value|my-custom-string|
+|check                |send accounting|Accounting-Response        |
+|check                |request        |${REQUEST}                 |
+|check                |response       |${RESPONSE}                |
+|check                |response id    |0                          |
 
 
 !3 RADIUS Base Request Scenario with table - Script Flow Mode
 Scenarios can be useful for set RADIUS input parameters and get output in table mode
 
-|scenario             |radius table request _|requestId,responseId?|
-|load base request                                                 |
-|set request attribute|User-Name             |with value|fooBar00  |
-|set request id       |@requestId                                  |
-|check                |send accounting       |Accounting-Response  |
-|$responseId=         |response id                                 |
+|scenario             |radius acct table request _|requestId,responseId?      |
+|load acct base request                                                       |
+|set request attribute|User-Name                  |with value|fooBar00        |
+|set request attribute|Custom-String              |with value|my-custom-string|
+|set request id       |@requestId                                             |
+|check                |send accounting            |Accounting-Response        |
+|$responseId=         |response id                                            |
 
 |script|radius client fixture|
 
-|radius table request |
-|requestId|responseId?|
-|101      |101        |
-|209      |209        |
+|radius acct table request|
+|requestId|responseId?    |
+|101      |101            |
+|209      |209            |
