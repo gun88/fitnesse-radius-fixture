@@ -4,8 +4,7 @@ Suite
 !2 RADIUS Accounting Communication - Table Mode
 This mode is useful for multiple request communication.
 
-RADIUS client fixture can be used as a ''!-DynamicDecisionTable-!''. Table name need the ''ddt'' prefix or a table
-type definition to work properly.
+RADIUS client fixture can be used as a ''!-DynamicDecisionTable-!''. Table name need the ''ddt'' prefix or a table type definition to work properly.
 
 !3 Dynamic Decision Table Prefix
 Add the ''ddt'' prefix to the table fixture.
