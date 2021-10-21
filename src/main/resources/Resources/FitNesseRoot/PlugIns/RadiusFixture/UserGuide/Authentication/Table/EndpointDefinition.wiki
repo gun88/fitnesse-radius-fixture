@@ -1,0 +1,50 @@
+---
+Test
+---
+!***> definitions
+!define REQUEST_0 { {{{Access-Request, ID 0
+User-Name: anon}}} }
+
+!define REQUEST_1 { {{{Access-Request, ID 0
+User-Name: anon
+Filter-Id: fooBar}}} }
+
+!define RESPONSE { {{{Access-Accept, ID 0}}} }
+
+*!
+!2 Set Endpoint in RADIUS Authentication Fixture Table Mode
+Host, Port and Shared Secret are the minimum set of coordinates to set a RADIUS endpoint and can be defined as shown in the following examples.
+
+!3 Column Definition
+Each endpoint coordinate has a dedicated column.
+|ddt           :radius client fixture                                                                        |
+|host          |auth port          |shared secret          |packet type   |User-Name|request?    |response?  |
+|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}|Authentication|anon     |${REQUEST_0}|${RESPONSE}|
+
+Also optional enpoint parameters can be defined in columns.
+|ddt           :radius client fixture                                                                                                 |
+|host          |auth port          |shared secret          |socket timeout|max retry|packet type   |User-Name|request?    |response?  |
+|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}|4000          |4        |Authentication|anon     |${REQUEST_0}|${RESPONSE}|
+
+!3 Inline Header Definition
+Table header accepts endopoint coordinates in the following order: ''hostname'', ''port'', ''shared secret''.
+|ddt           :radius client fixture|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}|
+|packet type   |User-Name            |Filter-Id     |request?           |response?              |
+|Authentication|anon                 |fooBar        |${REQUEST_1}       |${RESPONSE}            |
+
+Only these three main coordinates can be defined in table header. Optional enpoint parameters can be defined as shown in the Colum Definition mode.
+|ddt           :radius client fixture|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}           |
+|socket timeout|max retry            |packet type   |User-Name          |Filter-Id|request?    |response?  |
+|4000          |4                    |Authentication|anon               |fooBar   |${REQUEST_1}|${RESPONSE}|
+
+!3 Endpoint Map Definition
+Table header accepts endopint coordinates set via map. Endpoint related keys are the following:
+ * host
+ * sharedSecret
+ * authPort
+ * socketTimeout
+ * maxRetry
+
+|ddt           :radius client fixture|!{host:${RADIUS_HOST}, authPort:${RADIUS_AUTH_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}}|
+|packet type   |User-Name            |Filter-Id|request?    |response?                                                          |
+|Authentication|anon                 |fooBar   |${REQUEST_1}|${RESPONSE}                                                        |
