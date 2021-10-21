@@ -7,6 +7,7 @@ import org.tinyradius.dictionary.Dictionary;
 import org.tinyradius.dictionary.DictionaryParser;
 import org.tinyradius.packet.AccountingRequest;
 import org.tinyradius.packet.RadiusPacket;
+import org.tinyradius.util.RadiusUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -35,8 +36,8 @@ class RadiusFixtureUtil {
         return DictionaryParser.parseDictionary(inputStream);
     }
 
-    static byte[] toByteArray(String value) {
-        return value.startsWith("0x") ? decodeHex(value.substring(2)) : value.getBytes();
+    static byte[] getBytesFromHexString(String value) {
+        return value.toLowerCase().startsWith("0x") ? decodeHex(value.substring(2)) : RadiusUtil.getUtf8Bytes(value);
     }
 
     @SuppressWarnings("unchecked")
@@ -101,7 +102,7 @@ class RadiusFixtureUtil {
         return "<pre>" + HtmlUtil.escapeHTML(response) + "</pre>";
     }
 
-    private static byte[] decodeHex(String string) {
+    public static byte[] decodeHex(String string) {
         char[] data = string.toCharArray();
         byte[] out = new byte[data.length >> 1];
         int len = data.length;
