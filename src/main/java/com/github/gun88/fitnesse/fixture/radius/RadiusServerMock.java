@@ -18,11 +18,10 @@ import java.util.stream.Collectors;
 public class RadiusServerMock {
 
     private static RadiusServer radiusServer;
-
+    private final List<RadiusUser> radiusUsers = new ArrayList<>();
     private int acctPort = 2888;
     private int authPort = 2889;
     private String sharedSecret = "password";
-    private List<RadiusUser> radiusUsers = new ArrayList<>();
     private int duplicateInterval = 1;
     private boolean listenAuth = true;
     private boolean listenAcct = true;

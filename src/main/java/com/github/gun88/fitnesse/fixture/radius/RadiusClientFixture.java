@@ -22,7 +22,7 @@ import static org.tinyradius.packet.RadiusPacket.ACCOUNTING_REQUEST;
 public class RadiusClientFixture {
 
     private final RadiusClient radiusClient = new RadiusClient("127.0.0.1", "sharedSecret");
-    private RadiusPacket request = new RadiusPacket();
+    private final RadiusPacket request = new RadiusPacket();
     private RadiusPacket response;
     private String nullLabel = "null";
     private String authProtocol;

@@ -5,7 +5,7 @@ import org.tinyradius.dictionary.Dictionary;
 
 import java.io.IOException;
 
-public class ExtensibleDictionary implements Dictionary {
+class ExtensibleDictionary implements Dictionary {
 
     private final Dictionary baseDictionary;
     private final Dictionary extendedDictionary;
