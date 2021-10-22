@@ -1,0 +1,49 @@
+---
+Test
+---
+!***> definitions
+!define MAP_1 {!{host: localhost, acctPort: 1234, sharedSecret: fooBar, socketTimeout: 1000, maxRetry: 2, dictionary: ATTRIBUTE My-Attribute 250 string, nullLabel: #null#, packetType: Accounting}}
+
+!define MAP_2 {!{host: localhost, genericPort: 1234, sharedSecret: fooBar, packetType: Authentication, User-Name: anon}}
+
+!define REQUEST_1 { {{{Accounting-Request, ID 0
+Acct-Status-Type: Start}}} }
+
+!define REQUEST_2 { {{{Accounting-Request, ID 0}}} }
+
+!define REQUEST_3 { {{{Access-Request, ID 0
+User-Name: anon}}} }
+*!
+!2 Initialization Map Keys
+Here are listed available keys for Radius Client Fixture initialization map. Keys are case insensiteve.
+
+|Comment                                                                                                        |
+|Key                 |Type         |Descritpion                                              |Default           |
+|host                |string       |Server hostname or IP address                            |127.0.0.1         |
+|acctPort            |number       |Accounting messages port number                          |1812              |
+|authPort            |number       |Authentication messages port number                      |1813              |
+|genericPort         |number       |Generic messages port number                             |1813              |
+|sharedSecret        |string       |RADIUS server/client shared-secret                       |sharedSecret      |
+|socketTimeout       |number       |Socket timeout interval expressed in ms                  |3000              |
+|nullLabel           |string       |String value parsed as null                              |null              |
+|maxRetry            |number       |Maximum retries on communication fail                    |3                 |
+|requestId           |number       |RADIUS request identifier                                |0                 |
+|requestAuthenticator|octect       |Authenticator bytes for PAP authentication protocol      |randomly generated|
+|packetType          |string/number|RADIUS packet type (Accounting, Authentication or others)|N/A               |
+|dictionary          |string       |Dictionary string to extend default one                  |N/A               |
+|authPapPassword     |string       |Password for PAP authentication protocol                 |N/A               |
+|authChapPassword    |string       |Password for CHAP authentication protocol                |N/A               |
+
+Here is an example for Endpoint definition, dictionary extension and default parameters:
+
+|script               |radius client fixture|${MAP_1}         |
+|set request attribute|Acct-Status-Type     |with value|Start |
+|check                |request              |${REQUEST_1}     |
+|set request attribute|Acct-Status-Type     |with value|#null#|
+|check                |request              |${REQUEST_2}     |
+
+Every other key is processed as RADIUS attribute (key must exist in dictionary) and stored in request as a default attribute. The following example show a table with default User-Name.
+
+|script|radius client fixture|${MAP_2}    |
+|check |request              |${REQUEST_3}|
+

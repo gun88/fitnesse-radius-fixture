@@ -21,13 +21,13 @@ import static org.tinyradius.packet.RadiusPacket.ACCOUNTING_REQUEST;
 @Log
 public class RadiusClientFixture {
 
-    private final RadiusClient radiusClient = new RadiusClient("127.0.0.1", "password");
+    private final RadiusClient radiusClient = new RadiusClient("127.0.0.1", "sharedSecret");
     private RadiusPacket request = new RadiusPacket();
     private RadiusPacket response;
     private String nullLabel = "null";
     private String authProtocol;
     private String authUserPassword;
-    private int genericPort;
+    private int genericPort = 1813;
 
     public RadiusClientFixture() {
     }
@@ -56,8 +56,12 @@ public class RadiusClientFixture {
         radiusClient.setSharedSecret(sharedSecret);
     }
 
-    public void setSocketTimeout(int socketTimeout) throws SocketException {
-        radiusClient.setSocketTimeout(socketTimeout);
+    public void setSocketTimeout(int socketTimeout) {
+        try {
+            radiusClient.setSocketTimeout(socketTimeout);
+        } catch (SocketException e) {
+            log.warning("Can not set socket timeout: " + e.getMessage());
+        }
     }
 
     public void setAcctPort(int acctPort) {
@@ -187,8 +191,6 @@ public class RadiusClientFixture {
 
     @SneakyThrows
     public void set(String key, String value) {
-        // todo prova tutti i setter
-        // todo UserGuide sia per table che per maps
         String normalizedKey = key.replaceAll("[^\\w]", "");
 
         if (normalizedKey.equalsIgnoreCase("Host")) setHost(value);
@@ -203,8 +205,8 @@ public class RadiusClientFixture {
         else if (normalizedKey.equalsIgnoreCase("RequestAuthenticator")) setRequestAuthenticator(value);
         else if (normalizedKey.equalsIgnoreCase("PacketType")) setPacketType(value);
         else if (normalizedKey.equalsIgnoreCase("Dictionary")) extendDictionary(value);
-        else if (normalizedKey.equalsIgnoreCase("authPapPassword")) setAuthPapPassword(value);
-        else if (normalizedKey.equalsIgnoreCase("authChapPassword")) setAuthChapPassword(value);
+        else if (normalizedKey.equalsIgnoreCase("AuthPapPassword")) setAuthPapPassword(value);
+        else if (normalizedKey.equalsIgnoreCase("AuthChapPassword")) setAuthChapPassword(value);
         else if (isArrayPushNotation(key)) addRequestAttributeWithValue(removeArrayNotation(key), value);
         else setRequestAttributeWithValue(key, value);
 
@@ -212,8 +214,6 @@ public class RadiusClientFixture {
     }
 
     public Object get(String key) {
-        // todo UserGuide per table
-
         String normalizedKey = key.replaceAll("[^\\w]", "");
 
         if (normalizedKey.equalsIgnoreCase("Request")) return request();
