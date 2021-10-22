@@ -23,7 +23,7 @@ public class RadiusClientFixtureTest {
             "                                                                        \n" +
             "# https://www.iana.org/assignments/enterprise-numbers/enterprise-numbers\n" +
             "                                                                        \n" +
-            "VENDOR          3000    CutomVendor                                     \n" +
+            "VENDOR          3000    CustomVendor                                     \n" +
             "                                                                        \n" +
             "VENDORATTR      3000    Custom-Vendor-String    1   string              \n" +
             "VENDORATTR      3000    Custom-Vendor-Integer   2   integer             \n" +
