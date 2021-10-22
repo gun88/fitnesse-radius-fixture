@@ -24,7 +24,7 @@ In this page are listed Table column names to access RADIUS communication input 
 Here are listed available names for Radius Client Fixture tables '''input'''.
 
 |Comment                                                                                                        |
-|Name                |Type         |Descritpion                                              |Default           |
+|Name                |Type         |Description                                              |Default           |
 |host                |string       |Server hostname or IP address                            |127.0.0.1         |
 |acctPort            |number       |Accounting messages port number                          |1812              |
 |authPort            |number       |Authentication messages port number                      |1813              |
@@ -34,13 +34,13 @@ Here are listed available names for Radius Client Fixture tables '''input'''.
 |nullLabel           |string       |String value parsed as null                              |null              |
 |maxRetry            |number       |Maximum retries on communication fail                    |3                 |
 |requestId           |number       |RADIUS request identifier                                |0                 |
-|requestAuthenticator|octect       |Authenticator bytes for PAP authentication protocol      |randomly generated|
+|requestAuthenticator|octet        |Authenticator bytes for PAP authentication protocol      |randomly generated|
 |packetType          |string/number|RADIUS packet type (Accounting, Authentication or others)|N/A               |
 |dictionary          |string       |Dictionary string to extend default one                  |N/A               |
 |authPapPassword     |string       |Password for PAP authentication protocol                 |N/A               |
 |authChapPassword    |string       |Password for CHAP authentication protocol                |N/A               |
 
-Column names are case insensiteve and any non alphanumerical charachter is removed. For example, following names are equals:
+Column names are case insensitive and any non-alphanumerical character is removed. For example, following names are equals:
  * !-sharedSecret-!
  * !-shared_secret-!
  * !-shared secret-!
@@ -60,13 +60,13 @@ Every other column name is processed as RADIUS attribute (name must exist in dic
 Here are listed available names for Radius Client Fixture tables '''output'''.
 
 |Comment                                               |
-|Name          |Type  |Descritpion                     |
+|Name          |Type  |Description                     |
 |request       |string|RADIUS request dump             |
 |response      |string|RADIUS response dump            |
 |responseId    |number|RADIUS response id              |
 |packetTypeName|string|RADIUS response packet type name|
 
-Column names are case insensiteve and any non alphanumerical charachter is removed. For example, following names are equals:
+Column names are case insensitive and any non-alphanumerical character is removed. For example, following names are equals:
  * !-packetTypeName-!
  * !-packet_type_name-!
  * !-packet type name-!
@@ -81,7 +81,7 @@ Every other column name is processed as RADIUS attribute (name must exist in dic
 |request?    |response?            |response id?|packet type name?  |Reply-Message?                |
 |${REQUEST_3}|${RESPONSE_3}        |123         |Accounting-Response|Accounting Done!, event: Start|
 
-When response attribute id refer to a list, values values can be retrieved one by one with array notation header.
+When response attribute id refers to a list, values can be retrieved one by one with array notation header.
 
 |ddt         :radius client fixture|${MAP}                                                              |
 |request?    |response?            |response id?|packet type name?  |Reply-Message[0]?|Reply-Message[1]?|

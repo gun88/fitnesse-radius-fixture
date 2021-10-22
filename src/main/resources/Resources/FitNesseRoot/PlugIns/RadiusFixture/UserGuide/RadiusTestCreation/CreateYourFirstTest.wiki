@@ -22,7 +22,7 @@ NAS-Identifier: foo.bar.org}}} }
 
 *!
 !2 Create your first test
-To create your first test, retrieve your RADIUS server endpoint coordinates,then copy the following table and replace coordinates:
+To create your first test, retrieve your RADIUS server endpoint coordinates, then copy the following table and replace coordinates:
  * RADIUS host (hostname or ip)
  * RADIUS auth port (Authentication/Access RADIUS port)
  * RADIUS acct port (Accounting RADIUS port)

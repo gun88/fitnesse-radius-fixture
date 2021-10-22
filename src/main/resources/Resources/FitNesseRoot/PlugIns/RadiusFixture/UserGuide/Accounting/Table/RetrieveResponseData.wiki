@@ -12,7 +12,7 @@ Reply-Message: Accounting Done!
 Reply-Message: event: Start}}} }
 
 *!
-!2 Get Data From RADIUS Accounting Response Table Mode
+!2 Get Data from RADIUS Accounting Response Table Mode
 Following examples show how to retrieve data from responses.
 
 NOTE: RADIUS Mock Server returns customized ''Reply-Message'' when ''Callback-Id'' is set to ''simple-reply'' or ''multi-reply''.
@@ -24,13 +24,13 @@ Retrieve single data from RADIUS Accounting Response.
 |Accounting |111                  |Start           |simple-reply       |0x0012     |111         |0x0012      |Accounting Done!|${RESPONSE_0}|Accounting-Response|
 
 !3 Multiple Data in Single Field
-When response attribute id refer to a list, values are concatenated togheter and splitted by comma.
+When response attribute id refers to a list, values are concatenated together and split by comma.
 |ddt        :radius client fixture|${RADIUS_HOST}  |${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}                                                                               |
 |packet type|request id           |Acct-Status-Type|Callback-Id        |Proxy-State|response id?|Proxy-State?|Reply-Message?                |response?    |packet type name?  |
 |Accounting |222                  |Start           |multi-reply        |0x0012     |222         |0x0012      |Accounting Done!, event: Start|${RESPONSE_2}|Accounting-Response|
 
 !3 Multiple Data in Multiple Field
-When response attribute id refer to a list, values values can be retrieved one by one with array notation header.
+When response attribute id refers to a list, values can be retrieved one by one with array notation header.
 |ddt        :radius client fixture|${RADIUS_HOST}  |${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}                                                                                    |
 |packet type|request id           |Acct-Status-Type|Callback-Id        |Proxy-State|response id?|Proxy-State?|Reply-Message[0]?|Reply-Message[1]?|response?    |packet type name?  |
 |Accounting |222                  |Start           |multi-reply        |0x0012     |222         |0x0012      |Accounting Done! |event: Start     |${RESPONSE_2}|Accounting-Response|

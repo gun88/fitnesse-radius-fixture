@@ -1,7 +1,7 @@
 !1 !-Auto Extraction Mode Installation-!
-If you do not want to use !-RadiusFixture-! as a plugin, the auto extraction utility can be executed running the following command (replaceing /path/tp/fitnesse-radius-fixture.jar with the actual fitnesse-radius-fixture.jar and !-/FitNesseRoot/path-! with actual !-FitNesseRoot-! path):
+If you do not want to use !-RadiusFixture-! as a plugin, the auto extraction utility can be executed running the following command (replacing /path/to/fitnesse-radius-fixture.jar with the actual fitnesse-radius-fixture.jar and !-/FitNesseRoot/path-! with actual !-FitNesseRoot-! path):
 
-{{{java -classpath /path/tp/fitnesse-radius-fixture.jar com.github.gun88.fitnesse.plugin.radius.RadiusClientPlugin /FitNesseRoot/path}}}
+{{{java -classpath /path/to/fitnesse-radius-fixture.jar com.github.gun88.fitnesse.plugin.radius.RadiusClientPlugin /FitNesseRoot/path}}}
 
 !2 Documentation
 Documentation files are extracted in the [[!-FitNesse PlugIns-!][<PlugIns]] directory.

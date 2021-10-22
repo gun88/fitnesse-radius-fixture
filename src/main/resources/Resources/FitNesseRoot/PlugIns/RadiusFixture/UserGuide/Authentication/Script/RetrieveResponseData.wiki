@@ -12,7 +12,7 @@ Reply-Message: user: 'anon'
 Reply-Message: role: 'anon'}}} }
 
 *!
-!2 Get Data From RADIUS Authentication Response Script Mode
+!2 Get Data from RADIUS Authentication Response Script Mode
 Following examples show how to retrieve data from responses.
 
 NOTE: RADIUS Mock Server returns customized ''Reply-Message'' when ''Callback-Id'' is set to ''simple-reply'' or ''multi-reply''.
@@ -32,7 +32,7 @@ Retrieve single data from RADIUS Authentication Response.
 |check                |response           |${RESPONSE_0}                              |
 
 !3 Multiple Data in Single Field
-When response attribute id refer to a list, values are concatenated togheter and splitted by comma.
+When response attribute id refers to a list, values are concatenated together and split by comma.
 |script               |radius client fixture                                       |
 |load radius auth endpoint                                                         |
 |set request id       |222                                                         |
@@ -46,7 +46,7 @@ When response attribute id refer to a list, values are concatenated togheter and
 |check                |response           |${RESPONSE_1}                           |
 
 !3 Multiple Data in Multiple Field
-When response attribute id refer to a list, values values can be retrieved one by one with array notation header.
+When response attribute id refers to a list, values can be retrieved one by one with array notation header.
 |script               |radius client fixture                              |
 |load radius auth endpoint                                                |
 |set request id       |222                                                |
@@ -60,7 +60,7 @@ When response attribute id refer to a list, values values can be retrieved one b
 |check                |response attribute |Reply-Message|at|1|role: 'anon'|
 |check                |response           |${RESPONSE_1}                  |
 
-When attribute id refer to a list and order is not known, values can be checked one by one with method ''response attribute contains''.
+When attribute id refers to a list and order is not known, values can be checked one by one with method ''response attribute contains''.
 |script               |radius client fixture                                  |
 |load radius auth endpoint                                                    |
 |set request id       |222                                                    |

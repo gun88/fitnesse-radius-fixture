@@ -1,7 +1,7 @@
 !1 !-Manual Mode Installation-!
 If you do not want to use !-RadiusFixture-! as a plugin or extracting files, all you need to do to execute tests is set paths to fitnesse-radius-fixture.jar and its dependencies in test pages.
 
-{{{!path /path/tp/fitnesse-radius-fixture.jar
+{{{!path /path/to/fitnesse-radius-fixture.jar
 !path /path/to/tinyRadius.jar}}}
 
 !2 Documentation

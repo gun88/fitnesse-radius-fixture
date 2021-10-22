@@ -11,7 +11,7 @@ Framed-Protocol: PPP}}} }
 *!
 !2 Set Endpoint in RADIUS Authentication Fixture Script Mode
 Host, Port and Shared Secret are the minimum set of coordinates to set a RADIUS endpoint and can be defined as shown in the following examples.
-The Scenario Table definition mode is the suggessted one.
+The Scenario Table definition mode is the suggested  one.
 
 !3 Row Definition
 Each endpoint coordinate has a dedicated row.
@@ -25,7 +25,7 @@ Each endpoint coordinate has a dedicated row.
 |check                |request            |${REQUEST}     |
 |check                |response           |${RESPONSE}    |
 
-Also optional enpoint parameters can be defined in rows.
+Also optional endpoint parameters can be defined in rows.
 |script               |radius client fixture              |
 |set host             |${RADIUS_HOST}                     |
 |set auth port        |${RADIUS_AUTH_PORT}                |
@@ -54,7 +54,7 @@ RADIUS endpoint can be defined grouping coordinates rows in ''Scenario Table''.
 |check                |response           |${RESPONSE}    |
 
 !3 Inline Header Definition
-Table header accepts endopoint coordinates in the following order: ''hostname'', ''port'', ''shared secret''.
+Table header accepts endpoint coordinates in the following order: ''hostname'', ''port'', ''shared secret''.
 |script               |radius client fixture|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}|
 |set request attribute|User-Name            |with value    |anon                                       |
 |set request attribute|Framed-Protocol      |with value    |PPP                                        |
@@ -62,7 +62,7 @@ Table header accepts endopoint coordinates in the following order: ''hostname'',
 |check                |request              |${REQUEST}                                                |
 |check                |response             |${RESPONSE}                                               |
 
-Only these three main coordinates can be defined in table header. Optional enpoint parameters can be defined as shown in the Row Definition mode.
+Only these three main coordinates can be defined in table header. Optional endpoint parameters can be defined as shown in the Row Definition mode.
 |script               |radius client fixture|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}|
 |set socket timeout   |4000                                                                            |
 |set max retry        |4                                                                               |
@@ -73,7 +73,7 @@ Only these three main coordinates can be defined in table header. Optional enpoi
 |check                |response             |${RESPONSE}                                               |
 
 !3 Endpoint Map Definition
-Table header accepts endopint coordinates set via map. Endpoint related keys are the following:
+Table header accepts endpoint coordinates set via map. Endpoint related keys are the following:
  * host
  * sharedSecret
  * authPort

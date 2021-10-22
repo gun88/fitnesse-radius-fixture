@@ -11,7 +11,7 @@ Custom-String: my-custom-string}}} }
 
 *!
 !2 Scenario Table RADIUS Fixture Acceptance Tests
-Scenario Tables are usefeful to build well-formed RADIUS Fixture Acceptance Tests, especially for:
+Scenario Tables are useful to build well-formed RADIUS Fixture Acceptance Tests, especially for:
  * Dictionary definition/import
  * Endpoint definition/import
  * Base request definition/import

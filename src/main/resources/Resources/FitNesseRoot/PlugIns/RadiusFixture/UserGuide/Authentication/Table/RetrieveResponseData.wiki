@@ -12,7 +12,7 @@ Reply-Message: user: 'anon'
 Reply-Message: role: 'anon'}}} }
 
 *!
-!2 Get Data From RADIUS Authentication Response Table Mode
+!2 Get Data from RADIUS Authentication Response Table Mode
 Following examples show how to retrieve data from responses.
 
 NOTE: RADIUS Mock Server returns customized ''Reply-Message'' when ''Callback-Id'' is set to ''simple-reply'' or ''multi-reply''.
@@ -24,13 +24,13 @@ Retrieve single data from RADIUS Authentication Response.
 |Authentication|111                  |anon          |simple-reply       |0x0012     |111         |0x0012      |user: 'anon' and role: 'anon'|${RESPONSE_0}|Access-Accept    |
 
 !3 Multiple Data in Single Field
-When response attribute id refer to a list, values are concatenated togheter and splitted by comma.
+When response attribute id refers to a list, values are concatenated together and split by comma.
 |ddt           :radius client fixture|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}                                                                         |
 |packet type   |request id           |User-Name     |Callback-Id        |Proxy-State|response id?|Proxy-State?|Reply-Message?            |response?    |packet type name?|
 |Authentication|222                  |anon          |multi-reply        |0x0012     |222         |0x0012      |user: 'anon', role: 'anon'|${RESPONSE_2}|Access-Accept    |
 
 !3 Multiple Data in Multiple Field
-When response attribute id refer to a list, values values can be retrieved one by one with array notation header.
+When response attribute id refers to a list, values can be retrieved one by one with array notation header.
 |ddt           :radius client fixture|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}                                                                                  |
 |packet type   |request id           |User-Name     |Callback-Id        |Proxy-State|response id?|Proxy-State?|Reply-Message[0]?|Reply-Message[1]?|response?    |packet type name?|
 |Authentication|222                  |anon          |multi-reply        |0x0012     |222         |0x0012      |user: 'anon'     |role: 'anon'     |${RESPONSE_2}|Access-Accept    |

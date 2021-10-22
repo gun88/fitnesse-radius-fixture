@@ -18,7 +18,7 @@ User-Name: zooBar}}} }
 
 *!
 !2 Multiple Requests in RADIUS Accounting Fixture Script Mode
-Multiple request can be sent in script mode paying attention to updete/remove attributes.
+Multiple request can be sent in script mode paying attention to update/remove attributes.
 
 |script               |radius client fixture               |
 |load radius acct endpoint                                 |

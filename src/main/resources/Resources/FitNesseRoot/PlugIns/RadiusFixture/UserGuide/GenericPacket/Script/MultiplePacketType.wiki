@@ -20,7 +20,7 @@ NAS-Identifier: foo.bar.org}}} }
 
 *!
 !2 Multiple Packet Type in RADIUS Fixture Script Mode
-Different packet types can be sent with generic mode, included Autentication and Accounting packets.
+Different packet types can be sent with generic mode, included Authentication  and Accounting packets.
 
 |script               |radius client fixture                  |
 |load radius generic endpoint                                 |

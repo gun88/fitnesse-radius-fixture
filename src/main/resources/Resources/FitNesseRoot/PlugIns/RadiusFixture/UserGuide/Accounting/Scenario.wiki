@@ -2,6 +2,6 @@
 Suite
 ---
 !2 RADIUS Accounting Communication - Scenarios
-Scenario Tables are usefeful to build well-formed RADIUS Fixture Acceptance Tests, especially for:
+Scenario Tables are useful to build well-formed RADIUS Fixture Acceptance Tests, especially for:
 
 !contents -R2 -g -p -f -h

@@ -15,10 +15,10 @@ Acct-Status-Type: Start}}} }
 User-Name: anon}}} }
 *!
 !2 Initialization Map Keys
-Here are listed available keys for Radius Client Fixture initialization map. Keys are case insensiteve.
+Here are listed available keys for Radius Client Fixture initialization map. Keys are case insensitive.
 
 |Comment                                                                                                        |
-|Key                 |Type         |Descritpion                                              |Default           |
+|Key                 |Type         |Description                                              |Default           |
 |host                |string       |Server hostname or IP address                            |127.0.0.1         |
 |acctPort            |number       |Accounting messages port number                          |1812              |
 |authPort            |number       |Authentication messages port number                      |1813              |
@@ -28,7 +28,7 @@ Here are listed available keys for Radius Client Fixture initialization map. Key
 |nullLabel           |string       |String value parsed as null                              |null              |
 |maxRetry            |number       |Maximum retries on communication fail                    |3                 |
 |requestId           |number       |RADIUS request identifier                                |0                 |
-|requestAuthenticator|octect       |Authenticator bytes for PAP authentication protocol      |randomly generated|
+|requestAuthenticator|octet        |Authenticator bytes for PAP authentication protocol      |randomly generated|
 |packetType          |string/number|RADIUS packet type (Accounting, Authentication or others)|N/A               |
 |dictionary          |string       |Dictionary string to extend default one                  |N/A               |
 |authPapPassword     |string       |Password for PAP authentication protocol                 |N/A               |

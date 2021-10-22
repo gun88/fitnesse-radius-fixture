@@ -21,7 +21,7 @@ Reply-Message: Callback-Id: multi-reply
 Reply-Message: Proxy-State: 0x0012}}} }
 
 *!
-!2 Get Data From RADIUS Response Table Mode
+!2 Get Data from RADIUS Response Table Mode
 Following examples show how to retrieve data from responses.
 
 NOTE: RADIUS Mock Server returns customized ''Reply-Message'' when ''Callback-Id'' is set to ''simple-reply'' or ''multi-reply''.
@@ -33,13 +33,13 @@ Retrieve single data from RADIUS Response.
 |254        |111                  |foo.bar.org   |simple-reply          |0x0012     |111         |0x0012      |${REPLY_0}    |${RESPONSE_0}|Unknown (254)    |
 
 !3 Multiple Data in Single Field
-When response attribute id refer to a list, values are concatenated togheter and splitted by comma.
+When response attribute id refers to a list, values are concatenated together and split by comma.
 |ddt        :radius client fixture|${RADIUS_HOST}|${RADIUS_GENERIC_PORT}|${RADIUS_SHARED_SECRET}                                                             |
 |packet type|request id           |NAS-Identifier|Callback-Id           |Proxy-State|response id?|Proxy-State?|Reply-Message?|response?    |packet type name?|
 |254        |222                  |foo.bar.org   |multi-reply           |0x0012     |222         |0x0012      |${REPLY_1}    |${RESPONSE_1}|Unknown (254)    |
 
 !3 Multiple Data in Multiple Field
-When response attribute id refer to a list, values values can be retrieved one by one with array notation header.
+When response attribute id refers to a list, values can be retrieved one by one with array notation header.
 |ddt        :radius client fixture|${RADIUS_HOST}|${RADIUS_GENERIC_PORT}|${RADIUS_SHARED_SECRET}                                                                                                                       |
 |packet type|request id           |NAS-Identifier|Callback-Id           |Proxy-State|response id?|Proxy-State?|Reply-Message[0]?          |Reply-Message[1]?       |Reply-Message[2]?  |response?    |packet type name?|
 |254        |222                  |foo.bar.org   |multi-reply           |0x0012     |222         |0x0012      |NAS-Identifier: foo.bar.org|Callback-Id: multi-reply|Proxy-State: 0x0012|${RESPONSE_1}|Unknown (254)    |
