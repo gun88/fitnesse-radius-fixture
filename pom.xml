@@ -38,7 +38,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <tinyRadius.version>1.1.0-MOD</tinyRadius.version>
+        <tinyRadiusMod.version>1.0.0</tinyRadiusMod.version>
     </properties>
 
     <dependencies>
@@ -59,11 +59,11 @@
         <!-- radius -->
         <dependency>
             <groupId>org.tinyradius</groupId>
-            <artifactId>tinyradius</artifactId>
-            <version>${tinyRadius.version}</version>
-            <!-- NOTE: version not available in maven central -->
-            <!--    built and customized from github SNAPSHOT -->
-            <!--    todo install 3rd party -->
+            <artifactId>tinyradius-mod</artifactId>
+            <version>${tinyRadiusMod.version}</version>
+            <!-- NOTE: customized version not available in maven central -->
+            <!-- clone the project from https://github.com/gun88/TinyRadius/tree/mod and run `mvn install`. -->
+            <!-- install as a third party jar the tinyradius-mod-1.1.0.jar available here https://github.com/gun88/TinyRadius/releases -->
         </dependency>
         <!-- test -->
         <dependency>
