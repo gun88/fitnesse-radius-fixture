@@ -8,7 +8,7 @@ import static fitnesse.junit.FitNesseRunner.*;
 @RunWith(FitNesseRunner.class)
 @FitnesseDir("src/main/resources/Resources")
 @OutputDir("target/reports/fitnesse-results")
-@Suite("PlugIns.RadiusFixture.UserGuide.GenericPacket.Script.AttributesDefinition")
+@Suite("PlugIns.RadiusFixture.UserGuide")
 public class RadiusFixtureIT {
 
 
