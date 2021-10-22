@@ -2,11 +2,11 @@
 Test
 ---
 !***> definitions
-!define RESPONSE_0 { {{{Access-Accept, ID 0
+!define RESPONSE_0 { {{{Access-Accept, ID 111
 Proxy-State: 0x0012
 Reply-Message: user: 'anon' and role: 'anon'}}} }
 
-!define RESPONSE_2 { {{{Access-Accept, ID 0
+!define RESPONSE_2 { {{{Access-Accept, ID 222
 Proxy-State: 0x0012
 Reply-Message: user: 'anon'
 Reply-Message: role: 'anon'}}} }
@@ -19,20 +19,19 @@ NOTE: RADIUS Mock Server returns customized ''Reply-Message'' when ''Callback-Id
 
 !3 Single Data
 Retrieve single data from RADIUS Authentication Response.
-|ddt           :radius client fixture|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}                                                                |
-|packet type   |User-Name            |Callback-Id   |Proxy-State        |response id?|Proxy-State?|Reply-Message?               |response?    |packet type name?|
-|Authentication|anon                 |simple-reply  |0x0012             |0           |0x0012      |user: 'anon' and role: 'anon'|${RESPONSE_0}|Access-Accept    |
+|ddt           :radius client fixture|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}                                                                            |
+|packet type   |request id           |User-Name     |Callback-Id        |Proxy-State|response id?|Proxy-State?|Reply-Message?               |response?    |packet type name?|
+|Authentication|111                  |anon          |simple-reply       |0x0012     |111         |0x0012      |user: 'anon' and role: 'anon'|${RESPONSE_0}|Access-Accept    |
 
 !3 Multiple Data in Single Field
 When response attribute id refer to a list, values are concatenated togheter and splitted by comma.
-|ddt           :radius client fixture|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}                                                             |
-|packet type   |User-Name            |Callback-Id   |Proxy-State        |response id?|Proxy-State?|Reply-Message?            |response?    |packet type name?|
-|Authentication|anon                 |multi-reply   |0x0012             |0           |0x0012      |user: 'anon', role: 'anon'|${RESPONSE_2}|Access-Accept    |
+|ddt           :radius client fixture|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}                                                                         |
+|packet type   |request id           |User-Name     |Callback-Id        |Proxy-State|response id?|Proxy-State?|Reply-Message?            |response?    |packet type name?|
+|Authentication|222                  |anon          |multi-reply        |0x0012     |222         |0x0012      |user: 'anon', role: 'anon'|${RESPONSE_2}|Access-Accept    |
 
 !3 Multiple Data in Multiple Field
 When response attribute id refer to a list, values values can be retrieved one by one with array notation header.
-|ddt           :radius client fixture|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}                                                                      |
-|packet type   |User-Name            |Callback-Id   |Proxy-State        |response id?|Proxy-State?|Reply-Message[0]?|Reply-Message[1]?|response?    |packet type name?|
-|Authentication|anon                 |multi-reply   |0x0012             |0           |0x0012      |user: 'anon'     |role: 'anon'     |${RESPONSE_2}|Access-Accept    |
-
+|ddt           :radius client fixture|${RADIUS_HOST}|${RADIUS_AUTH_PORT}|${RADIUS_SHARED_SECRET}                                                                                  |
+|packet type   |request id           |User-Name     |Callback-Id        |Proxy-State|response id?|Proxy-State?|Reply-Message[0]?|Reply-Message[1]?|response?    |packet type name?|
+|Authentication|222                  |anon          |multi-reply        |0x0012     |222         |0x0012      |user: 'anon'     |role: 'anon'     |${RESPONSE_2}|Access-Accept    |
 

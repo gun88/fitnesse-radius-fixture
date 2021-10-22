@@ -3,7 +3,6 @@ package com.github.gun88.fitnesse.fixture.radius;
 import lombok.SneakyThrows;
 import lombok.extern.java.Log;
 import org.tinyradius.attribute.RadiusAttribute;
-import org.tinyradius.attribute.VendorSpecificAttribute;
 import org.tinyradius.dictionary.AttributeType;
 import org.tinyradius.packet.AccessRequest;
 import org.tinyradius.packet.AccountingRequest;
@@ -13,9 +12,7 @@ import org.tinyradius.util.RadiusException;
 
 import java.io.IOException;
 import java.net.SocketException;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static com.github.gun88.fitnesse.fixture.radius.RadiusFixtureUtil.*;
 import static org.tinyradius.packet.RadiusPacket.ACCESS_REQUEST;
@@ -188,25 +185,10 @@ public class RadiusClientFixture {
                 .anyMatch(x -> x.equals(value));
     }
 
-    @SuppressWarnings("unchecked")
-    public String responseAttributeForVendor(String vendorName) {
-        final int vendorId = response.getDictionary().getVendorId(vendorName);
-        final List<String> attributes = ((List<VendorSpecificAttribute>) response.getVendorAttributes(vendorId)).stream()
-                .map(VendorSpecificAttribute::getSubAttributes)
-                .flatMap(x -> ((List<RadiusAttribute>) x).stream())
-                .map(RadiusAttribute::toString)
-                .map(String::trim)
-                .collect(Collectors.toList());
-
-        if (attributes.isEmpty())
-            return null;
-
-        return String.join(", ", attributes);
-    }
-
     @SneakyThrows
     public void set(String key, String value) {
         // todo prova tutti i setter
+        // todo UserGuide sia per table che per maps
         String normalizedKey = key.replaceAll("[^\\w]", "");
 
         if (normalizedKey.equalsIgnoreCase("Host")) setHost(value);
@@ -230,6 +212,8 @@ public class RadiusClientFixture {
     }
 
     public Object get(String key) {
+        // todo UserGuide per table
+
         String normalizedKey = key.replaceAll("[^\\w]", "");
 
         if (normalizedKey.equalsIgnoreCase("Request")) return request();
