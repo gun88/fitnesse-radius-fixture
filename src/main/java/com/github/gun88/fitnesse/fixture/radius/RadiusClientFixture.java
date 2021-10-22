@@ -1,6 +1,7 @@
 package com.github.gun88.fitnesse.fixture.radius;
 
 import lombok.SneakyThrows;
+import lombok.extern.java.Log;
 import org.tinyradius.attribute.RadiusAttribute;
 import org.tinyradius.attribute.VendorSpecificAttribute;
 import org.tinyradius.dictionary.AttributeType;
@@ -20,7 +21,7 @@ import static com.github.gun88.fitnesse.fixture.radius.RadiusFixtureUtil.*;
 import static org.tinyradius.packet.RadiusPacket.ACCESS_REQUEST;
 import static org.tinyradius.packet.RadiusPacket.ACCOUNTING_REQUEST;
 
-//@Slf4j
+@Log
 public class RadiusClientFixture {
 
     private final RadiusClient radiusClient = new RadiusClient("127.0.0.1", "password");
@@ -29,32 +30,21 @@ public class RadiusClientFixture {
     private String nullLabel = "null";
     private String authProtocol;
     private String authUserPassword;
+    private int genericPort;
 
     public RadiusClientFixture() {
     }
 
     public RadiusClientFixture(String host, int port, String sharedSecret) {
         setHost(host);
-        setPort(port);
+        setGenericPort(port);
+        setAcctPort(port);
+        setAuthPort(port);
         setSharedSecret(sharedSecret);
     }
 
     public RadiusClientFixture(Map<String, String> map) {
         map.forEach(this::set);
-    }
-
-    public static AccessRequest toAccessRequest(RadiusPacket radiusPacket, String authUserPassword, String authProtocol) {
-        AccessRequest accessRequest = new AccessRequest();
-        accessRequest.setAttributes(radiusPacket.getAttributes());
-        if (authProtocol != null)
-            accessRequest.setAuthProtocol(authProtocol);
-        if (authUserPassword != null)
-            accessRequest.setUserPassword(authUserPassword);
-        accessRequest.setPacketIdentifier(radiusPacket.getPacketIdentifier());
-        accessRequest.setAuthenticator(radiusPacket.getAuthenticator());
-        accessRequest.setDictionary(radiusPacket.getDictionary());
-        accessRequest.setPacketType(radiusPacket.getPacketType());
-        return accessRequest;
     }
 
     public void setHost(String hostName) {
@@ -81,9 +71,8 @@ public class RadiusClientFixture {
         radiusClient.setAuthPort(authPort);
     }
 
-    public void setPort(int port) {
-        radiusClient.setAcctPort(port);
-        radiusClient.setAuthPort(port);
+    public void setGenericPort(int genericPort) {
+        this.genericPort = genericPort;
     }
 
     public void setNullLabel(String nullLabel) {
@@ -136,8 +125,8 @@ public class RadiusClientFixture {
         request.removeAttributes(attributeType.getVendorId(), attributeType.getTypeCode());
     }
 
-    public void clearRequest() {
-        request = new RadiusPacket();
+    public void clearRequestAttributes() {
+        request.getAttributes().clear();
     }
 
     public String sendAuthentication() throws IOException, RadiusException {
@@ -154,20 +143,20 @@ public class RadiusClientFixture {
         switch (request.getPacketType()) {
             case ACCESS_REQUEST:
                 AccessRequest accessRequest = toAccessRequest(request, authUserPassword, authProtocol);
-                // log.debug("send Access-Request packet: " + accessRequest);
+                log.fine("send Access-Request packet: " + accessRequest);
                 response = radiusClient.communicate(accessRequest, radiusClient.getAuthPort());
                 break;
             case ACCOUNTING_REQUEST:
                 AccountingRequest accountingRequest = toAccountingRequest(request);
-                // log.debug("send Accounting-Request packet: " + accountingRequest);
+                log.fine("send Accounting-Request packet: " + accountingRequest);
                 response = radiusClient.communicate(accountingRequest, radiusClient.getAcctPort());
                 break;
             default:
-                //log.debug("send Generic-Request packet: " + request);
-                response = radiusClient.communicate(request, radiusClient.getAcctPort());
+                log.fine("send Generic-Request packet: " + request);
+                response = radiusClient.communicate(request, genericPort);
                 break;
         }
-        //log.debug("received packet: " + response);
+        log.fine("received packet: " + response);
 
         return response.getPacketTypeName();
 
@@ -224,7 +213,7 @@ public class RadiusClientFixture {
         else if (normalizedKey.equalsIgnoreCase("SocketTimeout")) setSocketTimeout(Integer.parseInt(value));
         else if (normalizedKey.equalsIgnoreCase("AcctPort")) setAcctPort(Integer.parseInt(value));
         else if (normalizedKey.equalsIgnoreCase("AuthPort")) setAuthPort(Integer.parseInt(value));
-        else if (normalizedKey.equalsIgnoreCase("Port")) setPort(Integer.parseInt(value));
+        else if (normalizedKey.equalsIgnoreCase("GenericPort")) setGenericPort(Integer.parseInt(value));
         else if (normalizedKey.equalsIgnoreCase("SharedSecret")) setSharedSecret(value);
         else if (normalizedKey.equalsIgnoreCase("NullLabel")) setNullLabel(value);
         else if (normalizedKey.equalsIgnoreCase("MaxRetry")) setMaxRetry(Integer.parseInt(value));

@@ -5,6 +5,7 @@ import org.tinyradius.attribute.RadiusAttribute;
 import org.tinyradius.dictionary.AttributeType;
 import org.tinyradius.dictionary.Dictionary;
 import org.tinyradius.dictionary.DictionaryParser;
+import org.tinyradius.packet.AccessRequest;
 import org.tinyradius.packet.AccountingRequest;
 import org.tinyradius.packet.RadiusPacket;
 import org.tinyradius.util.RadiusUtil;
@@ -63,6 +64,20 @@ class RadiusFixtureUtil {
         return accountingRequest;
     }
 
+    static AccessRequest toAccessRequest(RadiusPacket radiusPacket, String authUserPassword, String authProtocol) {
+        AccessRequest accessRequest = new AccessRequest();
+        accessRequest.setAttributes(radiusPacket.getAttributes());
+        if (authProtocol != null)
+            accessRequest.setAuthProtocol(authProtocol);
+        if (authUserPassword != null)
+            accessRequest.setUserPassword(authUserPassword);
+        accessRequest.setPacketIdentifier(radiusPacket.getPacketIdentifier());
+        accessRequest.setAuthenticator(radiusPacket.getAuthenticator());
+        accessRequest.setDictionary(radiusPacket.getDictionary());
+        accessRequest.setPacketType(radiusPacket.getPacketType());
+        return accessRequest;
+    }
+
     static int packetTypeToId(String packetType) {
         if (AUTHENTICATION_LABELS.contains(packetType.toUpperCase())) return ACCESS_REQUEST;
         if (ACCOUNTING_LABELS.contains(packetType.toUpperCase())) return ACCOUNTING_REQUEST;
@@ -86,7 +101,7 @@ class RadiusFixtureUtil {
     }
 
 
-    static String stripPreFormatted(String value) {
+    private static String stripPreFormatted(String value) {
         String result = value;
         if (value != null) {
             Matcher matcher = PRE_FORMATTED_PATTERN.matcher(value);
@@ -102,7 +117,7 @@ class RadiusFixtureUtil {
         return "<pre>" + HtmlUtil.escapeHTML(response) + "</pre>";
     }
 
-    public static byte[] decodeHex(String string) {
+    private static byte[] decodeHex(String string) {
         char[] data = string.toCharArray();
         byte[] out = new byte[data.length >> 1];
         int len = data.length;

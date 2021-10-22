@@ -13,6 +13,7 @@ import java.net.DatagramPacket;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RadiusServerMock {
 
@@ -106,6 +107,16 @@ public class RadiusServerMock {
                 .orElseGet(RadiusUser::empty);
     }
 
+    private List<RadiusAttribute> extractAttributes(RadiusPacket response) {
+        ArrayList<RadiusAttribute> radiusAttributes = new ArrayList<>();
+        for (Object attribute : response.getAttributes()) {
+            if (!(attribute instanceof RadiusAttribute))
+                continue;
+            radiusAttributes.add((RadiusAttribute) attribute);
+        }
+        return radiusAttributes;
+    }
+
     private static class RadiusUser {
         private final String username;
         private final String password;
@@ -165,6 +176,13 @@ public class RadiusServerMock {
         }
 
         @Override
+        protected RadiusPacket handlePacket(InetSocketAddress localAddress, InetSocketAddress remoteAddress, RadiusPacket request, String sharedSecret) throws RadiusException, IOException {
+            if (request.getPacketType() == 254)
+                return echoRequestReceived(request);
+            return super.handlePacket(localAddress, remoteAddress, request, sharedSecret);
+        }
+
+        @Override
         protected RadiusPacket makeRadiusPacket(DatagramPacket packet, String sharedSecret, int forceType) throws IOException, RadiusException {
             try {
                 return super.makeRadiusPacket(packet, sharedSecret, forceType);
@@ -219,11 +237,31 @@ public class RadiusServerMock {
             return response;
         }
 
+        private RadiusPacket echoRequestReceived(RadiusPacket request) {
+            RadiusPacket response = new RadiusPacket(request.getPacketType(), request.getPacketIdentifier(), request.getAttributes());
+            String attribute = request.getAttributeValue("Callback-Id");
+            if ("dump-nas-identifier".equalsIgnoreCase(attribute)) {
+                response.addAttribute("Reply-Message", "NAS-Identifier: " + request.getAttributeValue("NAS-Identifier"));
+            }
+            if ("simple-reply".equalsIgnoreCase(attribute)) {
+                String message = extractAttributes(response).stream()
+                        .map(RadiusAttribute::toString)
+                        .map(s -> "[" + s + "]")
+                        .collect(Collectors.joining());
+                response.addAttribute("Reply-Message", message);
+            }
+            if ("multi-reply".equalsIgnoreCase(attribute)) {
+                extractAttributes(response).stream()
+                        .map(RadiusAttribute::toString)
+                        .forEach(line -> response.addAttribute("Reply-Message", line));
+            }
+            return response;
+        }
+
         private boolean isAnonRole(RadiusPacket radiusPacket) {
             String username = extractUserName(radiusPacket);
             String role = getUserRole(username);
             return "anon".equalsIgnoreCase(role);
         }
-
     }
 }
