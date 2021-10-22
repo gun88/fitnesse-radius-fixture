@@ -2,7 +2,6 @@
 Test
 ---
 !***> definitions
-
 !define REQUEST_1 { {{{Accounting-Request, ID 0
 Acct-Status-Type: Start
 User-Name: fooBar}}} }
@@ -24,15 +23,13 @@ User-Name: zooBar}}} }
 User-Name: null}}} }
 
 !define RESPONSE { {{{Accounting-Response, ID 0}}} }
-
-
-
 *!
 !2 Set Attributes in RADIUS Accounting Fixture Script Mode
 In script mode, attributes can be set or removed via rows. Default attributes can also be defined by header map.
 
 !3 Row Definition
 Single value attributes can be provided by row definition.
+
 |script               |radius client fixture               |
 |load radius acct endpoint                                 |
 |set request attribute|Acct-Status-Type|with value|Start   |
@@ -42,6 +39,7 @@ Single value attributes can be provided by row definition.
 |check                |response        |${RESPONSE}        |
 
 To provide attributes as list, use the ''add request attribute'' method instead of ''set request attribute''.
+
 |script               |radius client fixture               |
 |load radius acct endpoint                                 |
 |set request attribute|Acct-Status-Type|with value|Start   |
@@ -52,6 +50,7 @@ To provide attributes as list, use the ''add request attribute'' method instead 
 |check                |response        |${RESPONSE}        |
 
 To update an attribute, use ''set request attribute'' method.
+
 |script               |radius client fixture              |
 |load radius acct endpoint                                |
 |set request attribute|User-Name      |with value|fooBar  |
@@ -63,8 +62,25 @@ To update an attribute, use ''set request attribute'' method.
 |check                |request        |${REQUEST_4}       |
 |check                |response       |${RESPONSE}        |
 
+To remove an attribute, use the ''remove request attribute'' method.
 
-To remove an attribute, set its value to ''null''.
+|script                  |radius client fixture              |
+|load radius acct endpoint                                   |
+|set request attribute   |User-Name      |with value|fooBar  |
+|check                   |send accounting|Accounting-Response|
+|check                   |request        |${REQUEST_3}       |
+|check                   |response       |${RESPONSE}        |
+|remove request attribute|User-Name                          |
+|check                   |send accounting|Accounting-Response|
+|check                   |request        |${REQUEST_5}       |
+|check                   |response       |${RESPONSE}        |
+|set request attribute   |User-Name      |with value|zooBar  |
+|check                   |send accounting|Accounting-Response|
+|check                   |request        |${REQUEST_4}       |
+|check                   |response       |${RESPONSE}        |
+
+Or set its value to ''null''.
+
 |script               |radius client fixture              |
 |load radius acct endpoint                                |
 |set request attribute|User-Name      |with value|fooBar  |
@@ -112,8 +128,8 @@ Default attributes can be set via scenario or header map.
 |check                |request        |${REQUEST_1}       |
 |check                |response       |${RESPONSE}        |
 
-
 The previous request can be also defined as the following table:
+
 |script               |radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, packetType:Accounting, Acct-Status-Type:Start}|
 |set request attribute|User-Name            |with value|fooBar                                                                                                                        |
 |check                |send accounting      |Accounting-Response                                                                                                                      |

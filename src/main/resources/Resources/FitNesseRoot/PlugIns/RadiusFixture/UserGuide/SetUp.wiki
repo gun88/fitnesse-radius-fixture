@@ -33,7 +33,6 @@ VENDORATTR      3000    Custom-Vendor-String    1   string
 VENDORATTR      3000    Custom-Vendor-Integer   2   integer
 
 }}} }
-
 *!
 
 |script      |radius server mock                                  |

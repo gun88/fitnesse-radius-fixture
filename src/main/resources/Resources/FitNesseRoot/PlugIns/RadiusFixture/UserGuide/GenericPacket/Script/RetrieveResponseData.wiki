@@ -15,7 +15,6 @@ Proxy-State: 0x0014
 Reply-Message: NAS-Identifier: foo.bar.org
 Reply-Message: Callback-Id: multi-reply
 Reply-Message: Proxy-State: 0x0014}}} }
-
 *!
 !2 Get Data from RADIUS Response Script Mode
 Following examples show how to retrieve data from responses.
@@ -24,6 +23,7 @@ NOTE: RADIUS Mock Server returns customized ''Reply-Message'' when ''Callback-Id
 
 !3 Single Data
 Retrieve single data from RADIUS Response.
+
 |script               |radius client fixture                                                                                         |
 |load radius generic endpoint                                                                                                        |
 |set packet type      |254                                                                                                           |
@@ -39,6 +39,7 @@ Retrieve single data from RADIUS Response.
 
 !3 Multiple Data in Single Field
 When response attribute id refers to a list, values are concatenated together and split by comma.
+
 |script               |radius client fixture                                                                                      |
 |load radius generic endpoint                                                                                                     |
 |set packet type      |254                                                                                                        |
@@ -54,6 +55,7 @@ When response attribute id refers to a list, values are concatenated together an
 
 !3 Multiple Data in Multiple Field
 When response attribute id refers to a list, values can be retrieved one by one with array notation header.
+
 |script               |radius client fixture                                            |
 |load radius generic endpoint                                                           |
 |set packet type      |254                                                              |
@@ -70,6 +72,7 @@ When response attribute id refers to a list, values can be retrieved one by one 
 |check                |response          |${RESPONSE_1}                                 |
 
 When attribute id refers to a list and order is not known, values can be checked one by one with method ''response attribute contains''.
+
 |script               |radius client fixture                                                |
 |load radius generic endpoint                                                               |
 |set packet type      |254                                                                  |

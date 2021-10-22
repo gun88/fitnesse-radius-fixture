@@ -5,7 +5,7 @@ As shown in [[!-QuickStart-!][<UserGuide]] session, the plugin mode installation
 Documentation files are automatically extracted in the [[!-FitNesse PlugIns-!][<PlugIns]] directory.
 
 !2 Dependencies
-To run tests with default implementations, !-RadiusFixture-! needs the [[tinyRadius][http://www.jcraft.com/tinyRadius/]] library that, in plugin mode, is also auto-extracted. To run test with customized implementations, go to [[this][<UserGuide.Customization]] page.
+!-RadiusFixture-! needs the [[tinyRadius][http://www.jcraft.com/tinyRadius/]] library that, in plugin mode, is also auto-extracted.
 
 !2 Classpath
 During plugin mode initialization, paths to required jars are stored in FitNesse context with the following keys:

@@ -14,22 +14,26 @@ Host, Port and Shared Secret are the minimum set of coordinates to set a RADIUS 
 
 !3 Column Definition
 Each endpoint coordinate has a dedicated column.
+
 |ddt           :radius client fixture                                                                              |
 |host          |generic port          |shared secret          |packet type|NAS-Identifier|request?    |response?   |
 |${RADIUS_HOST}|${RADIUS_GENERIC_PORT}|${RADIUS_SHARED_SECRET}|254        |foo.bar.org   |${REQUEST_0}|${REQUEST_0}|
 
 Also optional endpoint parameters can be defined in columns.
+
 |ddt           :radius client fixture                                                                                                       |
 |host          |generic port          |shared secret          |socket timeout|max retry|packet type|NAS-Identifier|request?    |response?   |
 |${RADIUS_HOST}|${RADIUS_GENERIC_PORT}|${RADIUS_SHARED_SECRET}|4000          |4        |254        |foo.bar.org   |${REQUEST_0}|${REQUEST_0}|
 
 !3 Inline Header Definition
 Table header accepts endpoint coordinates in the following order: ''hostname'', ''port'', ''shared secret''.
+
 |ddt        :radius client fixture|${RADIUS_HOST}|${RADIUS_GENERIC_PORT}|${RADIUS_SHARED_SECRET}|
 |packet type|NAS-Identifier       |Filter-Id     |request?              |response?              |
 |254        |foo.bar.org          |fooBar        |${REQUEST_1}          |${REQUEST_1}           |
 
 Only these three main coordinates can be defined in table header. Optional endpoint parameters can be defined as shown in the Colum Definition mode.
+
 |ddt           :radius client fixture|${RADIUS_HOST}|${RADIUS_GENERIC_PORT}|${RADIUS_SHARED_SECRET}            |
 |socket timeout|max retry            |packet type   |NAS-Identifier        |Filter-Id|request?    |response?   |
 |4000          |4                    |254           |foo.bar.org           |fooBar   |${REQUEST_1}|${REQUEST_1}|

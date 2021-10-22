@@ -10,7 +10,6 @@ Acct-Status-Type: Start
 User-Name: fooBar}}} }
 
 !define RESPONSE { {{{Accounting-Response, ID 0}}} }
-
 *!
 !2 Set Endpoint in RADIUS Accounting Fixture Script Mode
 Host, Port and Shared Secret are the minimum set of coordinates to set a RADIUS endpoint and can be defined as shown in the following examples.
@@ -18,6 +17,7 @@ The Scenario Table definition mode is the suggested  one.
 
 !3 Row Definition
 Each endpoint coordinate has a dedicated row.
+
 |script               |radius client fixture               |
 |set host             |${RADIUS_HOST}                      |
 |set acct port        |${RADIUS_ACCT_PORT}                 |
@@ -28,6 +28,7 @@ Each endpoint coordinate has a dedicated row.
 |check                |response        |${RESPONSE}        |
 
 Also optional endpoint parameters can be defined in rows.
+
 |script               |radius client fixture               |
 |set host             |${RADIUS_HOST}                      |
 |set acct port        |${RADIUS_ACCT_PORT}                 |
@@ -55,6 +56,7 @@ RADIUS endpoint can be defined grouping coordinates rows in ''Scenario Table''.
 
 !3 Inline Header Definition
 Table header accepts endpoint coordinates in the following order: ''hostname'', ''port'', ''shared secret''.
+
 |script               |radius client fixture|${RADIUS_HOST}|${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}|
 |set request attribute|Acct-Status-Type     |with value    |Start                                      |
 |set request attribute|User-Name            |with value    |fooBar                                     |
@@ -63,6 +65,7 @@ Table header accepts endpoint coordinates in the following order: ''hostname'', 
 |check                |response             |${RESPONSE}                                               |
 
 Only these three main coordinates can be defined in table header. Optional endpoint parameters can be defined as shown in the Row Definition mode.
+
 |script               |radius client fixture|${RADIUS_HOST}|${RADIUS_ACCT_PORT}|${RADIUS_SHARED_SECRET}|
 |set socket timeout   |4000                                                                            |
 |set max retry        |4                                                                               |

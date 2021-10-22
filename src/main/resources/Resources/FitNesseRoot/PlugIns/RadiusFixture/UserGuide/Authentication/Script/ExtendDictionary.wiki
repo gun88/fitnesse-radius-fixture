@@ -2,7 +2,6 @@
 Test
 ---
 !***> definitions
-
 !define REQUEST { {{{Access-Request, ID 0
 User-Name: anon
 Framed-Protocol: PPP
@@ -19,13 +18,13 @@ Vendor-Specific: CustomVendor (3000)
   Custom-Vendor-Integer: 9234}}} }
 
 !define RESPONSE { {{{Access-Accept, ID 0}}} }
-
 *!
 !2 Extend Dictionary in RADIUS Authentication Fixture Script Mode
 Following examples show how to extend Dictionary in RADIUS Authentication Communication. The suggested method is ''Scenario Table''.
 
 !3 Extend Dictionary in Table Header
 RADIUS Dictionary can be extended providing a custom dictionary into the table header constructor map.
+
 |script               |radius client fixture|!{dictionary:${CUSTOM_DICTIONARY}}     |
 |load radius auth endpoint                                                          |
 |set request attribute|User-Name            |with value|anon                        |
@@ -45,6 +44,7 @@ RADIUS Dictionary can be extended providing a custom dictionary into the table h
 
 !3 Extend Dictionary in Table Row
 RADIUS Dictionary can be extended providing a custom dictionary into the ''extend dictionary'' table row.
+
 |script               |radius client fixture                                        |
 |load radius auth endpoint                                                          |
 |extend dictionary    |${CUSTOM_DICTIONARY}                                         |

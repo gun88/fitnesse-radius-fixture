@@ -4,6 +4,6 @@ Static
 !1 !-RadiusFixture-! installation
 !-RadiusFixture-! can be installed as a plugin or just provided during test executions.
 
-The suggested installation mode is the [[!-PluginMode-!][Installation.PluginMode]].
+The suggested installation mode is the [[!-PluginMode-!][<UserGuide.Installation.PluginMode]].
 
 !contents -R2 -g -p -f -h

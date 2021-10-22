@@ -10,7 +10,6 @@ Reply-Message: user: 'anon' and role: 'anon'}}} }
 Proxy-State: 0x0014
 Reply-Message: user: 'anon'
 Reply-Message: role: 'anon'}}} }
-
 *!
 !2 Get Data from RADIUS Authentication Response Script Mode
 Following examples show how to retrieve data from responses.
@@ -19,6 +18,7 @@ NOTE: RADIUS Mock Server returns customized ''Reply-Message'' when ''Callback-Id
 
 !3 Single Data
 Retrieve single data from RADIUS Authentication Response.
+
 |script               |radius client fixture                                          |
 |load radius auth endpoint                                                            |
 |set request id       |111                                                            |
@@ -33,6 +33,7 @@ Retrieve single data from RADIUS Authentication Response.
 
 !3 Multiple Data in Single Field
 When response attribute id refers to a list, values are concatenated together and split by comma.
+
 |script               |radius client fixture                                       |
 |load radius auth endpoint                                                         |
 |set request id       |222                                                         |
@@ -47,6 +48,7 @@ When response attribute id refers to a list, values are concatenated together an
 
 !3 Multiple Data in Multiple Field
 When response attribute id refers to a list, values can be retrieved one by one with array notation header.
+
 |script               |radius client fixture                              |
 |load radius auth endpoint                                                |
 |set request id       |222                                                |
@@ -61,6 +63,7 @@ When response attribute id refers to a list, values can be retrieved one by one 
 |check                |response           |${RESPONSE_1}                  |
 
 When attribute id refers to a list and order is not known, values can be checked one by one with method ''response attribute contains''.
+
 |script               |radius client fixture                                  |
 |load radius auth endpoint                                                    |
 |set request id       |222                                                    |

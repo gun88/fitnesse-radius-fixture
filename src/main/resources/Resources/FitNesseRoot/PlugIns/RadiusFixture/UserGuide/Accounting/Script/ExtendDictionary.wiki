@@ -2,7 +2,6 @@
 Test
 ---
 !***> definitions
-
 !define REQUEST { {{{Accounting-Request, ID 0
 Acct-Status-Type: Start
 Custom-String: my-custom-string
@@ -18,13 +17,13 @@ Vendor-Specific: CustomVendor (3000)
   Custom-Vendor-Integer: 9234}}} }
 
 !define RESPONSE { {{{Accounting-Response, ID 0}}} }
-
 *!
 !2 Extend Dictionary in RADIUS Accounting Fixture Script Mode
 Following examples show how to extend Dictionary in RADIUS Accounting Communication. The suggested method is ''Scenario Table''.
 
 !3 Extend Dictionary in Table Header
 RADIUS Dictionary can be extended providing a custom dictionary into the table header constructor map.
+
 |script               |radius client fixture|!{dictionary:${CUSTOM_DICTIONARY}}     |
 |load radius acct endpoint                                                          |
 |set request attribute|Acct-Status-Type     |with value|Start                       |
@@ -43,6 +42,7 @@ RADIUS Dictionary can be extended providing a custom dictionary into the table h
 
 !3 Extend Dictionary in Table Row
 RADIUS Dictionary can be extended providing a custom dictionary into the ''extend dictionary'' table row.
+
 |script               |radius client fixture                                        |
 |load radius acct endpoint                                                          |
 |extend dictionary    |${CUSTOM_DICTIONARY}                                         |

@@ -8,7 +8,6 @@ User-Name: fooBar00
 Custom-String: my-custom-string}}} }
 
 !define RESPONSE { {{{Accounting-Response, ID 0}}} }
-
 *!
 !2 Scenario Table RADIUS Fixture Acceptance Tests
 Scenario Tables are useful to build well-formed RADIUS Fixture Acceptance Tests, especially for:
@@ -70,7 +69,6 @@ Scenarios can be useful for reusable RADIUS Base Request definitions
 |check                |request        |${REQUEST}                 |
 |check                |response       |${RESPONSE}                |
 |check                |response id    |0                          |
-
 
 !3 RADIUS Base Request Scenario with table - Script Flow Mode
 Scenarios can be useful for set RADIUS input parameters and get output in table mode

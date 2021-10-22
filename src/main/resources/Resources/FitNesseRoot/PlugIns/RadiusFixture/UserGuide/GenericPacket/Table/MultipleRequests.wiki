@@ -2,7 +2,6 @@
 Test
 ---
 !***> definitions
-
 !define REQUEST_0 { {{{Unknown (254), ID 0
 NAS-Identifier: foo.bar.org
 Filter-Id: fooBar}}} }
@@ -20,7 +19,6 @@ Class: A:fooBar
 Class: B:zooBar}}} }
 
 !define RESPONSE { {{{Unknown (254), ID 0}}} }
-
 *!
 !2 Multiple Requests in RADIUS Fixture Table Mode
 Multiple request can be easily sent in table mode.
@@ -32,6 +30,7 @@ Multiple request can be easily sent in table mode.
 
 !3 Remove Attribute
 To remove an attribute, provide ''null'' as value.
+
 |ddt      :radius client fixture|!{host:${RADIUS_HOST}, genericPort:${RADIUS_GENERIC_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, packetType:254, NAS-Identifier:foo.bar.org}|
 |Filter-Id|request?             |response?                                                                                                                                   |
 |fooBar   |${REQUEST_0}         |${REQUEST_0}                                                                                                                                |

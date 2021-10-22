@@ -2,7 +2,6 @@
 Test
 ---
 !***> definitions
-
 !define REQUEST_0 { {{{Access-Request, ID 0
 User-Name: anon
 Framed-Protocol: PPP}}} }
@@ -15,7 +14,6 @@ User-Name: anon
 Framed-Protocol: SLIP}}} }
 
 !define RESPONSE { {{{Access-Accept, ID 0}}} }
-
 *!
 !2 Multiple Requests in RADIUS Authentication Fixture Script Mode
 Multiple request can be sent in script mode paying attention to update/remove attributes.
@@ -34,6 +32,7 @@ Multiple request can be sent in script mode paying attention to update/remove at
 
 !3 Remove Attribute
 To remove an attribute, provide ''null'' as value.
+
 |script               |radius client fixture              |
 |load radius auth endpoint                                |
 |set request attribute|User-Name          |with value|anon|

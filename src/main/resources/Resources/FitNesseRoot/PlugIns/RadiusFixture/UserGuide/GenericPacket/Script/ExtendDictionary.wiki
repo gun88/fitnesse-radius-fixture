@@ -2,7 +2,6 @@
 Test
 ---
 !***> definitions
-
 !define REQUEST { {{{Unknown (254), ID 0
 NAS-Identifier: foo.bar.org
 Framed-Protocol: PPP
@@ -32,13 +31,13 @@ Vendor-Specific: CustomVendor (3000)
   Custom-Vendor-String: my-custom-vendor-string
 Vendor-Specific: CustomVendor (3000)
   Custom-Vendor-Integer: 9234}}} }
-
 *!
 !2 Extend Dictionary in RADIUS Fixture Script Mode
 Following examples show how to extend Dictionary in RADIUS Communication. The suggested method is ''Scenario Table''.
 
 !3 Extend Dictionary in Table Header
 RADIUS Dictionary can be extended providing a custom dictionary into the table header constructor map.
+
 |script               |radius client fixture|!{dictionary:${CUSTOM_DICTIONARY}}     |
 |load radius generic endpoint                                                       |
 |set packet type      |254                                                          |
@@ -59,6 +58,7 @@ RADIUS Dictionary can be extended providing a custom dictionary into the table h
 
 !3 Extend Dictionary in Table Row
 RADIUS Dictionary can be extended providing a custom dictionary into the ''extend dictionary'' table row.
+
 |script               |radius client fixture                                        |
 |load radius generic endpoint                                                       |
 |set packet type      |254                                                          |

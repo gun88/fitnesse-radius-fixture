@@ -1,5 +1,4 @@
 !***> definitions
-
 !define AUTH_REQUEST { {{{Access-Request, ID 0
 User-Name: user001
 User-Password: 0x70617373776f7264303031}}} }
@@ -19,7 +18,6 @@ Acct-Status-Type: Stop}}} }
 
 !define ECHO_REQUEST { {{{Unknown (254), ID 0
 NAS-Identifier: foo.bar.org}}} }
-
 *!
 !2 Create your first test
 To create your first test, retrieve your RADIUS server endpoint coordinates, then copy the following table and replace coordinates:

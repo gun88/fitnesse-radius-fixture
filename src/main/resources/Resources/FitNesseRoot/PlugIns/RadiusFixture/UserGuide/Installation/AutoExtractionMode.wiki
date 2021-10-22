@@ -7,7 +7,7 @@ If you do not want to use !-RadiusFixture-! as a plugin, the auto extraction ut
 Documentation files are extracted in the [[!-FitNesse PlugIns-!][<PlugIns]] directory.
 
 !2 Dependencies
-To run tests with default implementations, !-RadiusFixture-! needs the [[tinyRadius][http://www.jcraft.com/tinyRadius/]] library that, in auto extraction mode, is also auto-extracted. To run test with customized implementations, go to [[this][<UserGuide.Customization]] page.
+!-RadiusFixture-! needs the [[tinyRadius][http://www.jcraft.com/tinyRadius/]] library that, in plugin mode, is also auto-extracted.
 
 !2 Classpath
 During extraction, paths to required jars are replaced in the !-RadiusFixture.wiki-! so the user guide file can be executed correctly. To run :

@@ -2,25 +2,25 @@
 Test
 ---
 !***> definitions
-
 !define REQUEST { {{{Accounting-Request, ID 0
 Acct-Status-Type: Start
 Custom-String: fooBar}}} }
 
 !define RESPONSE { {{{Accounting-Response, ID 0}}} }
-
 *!
 !2 Extend Dictionary in RADIUS Accounting Fixture Table Mode
 Following examples show how to extend Dictionary in RADIUS Accounting Communication.
 
 !3 Extend Dictionary in Table Header
 RADIUS Dictionary can be extended providing a custom dictionary into the table header constructor map.
+
 |ddt        :radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, dictionary:${CUSTOM_DICTIONARY}}|
 |packet type|Acct-Status-Type     |Custom-String|request?  |response?                                                                                         |
 |Accounting |Start                |fooBar       |${REQUEST}|${RESPONSE}                                                                                       |
 
 !3 Extend Dictionary in Table Column
 RADIUS Dictionary can be extended providing a custom dictionary into the ''dictionary'' table column.
+
 |ddt                 :radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}}|
 |dictionary          |packet type          |Acct-Status-Type|Custom-String|request?  |response?                                       |
 |${CUSTOM_DICTIONARY}|Accounting           |Start           |fooBar       |${REQUEST}|${RESPONSE}                                     |

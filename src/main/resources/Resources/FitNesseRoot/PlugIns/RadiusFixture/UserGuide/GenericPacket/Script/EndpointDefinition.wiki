@@ -5,7 +5,6 @@ Test
 !define REQUEST { {{{Unknown (254), ID 0
 NAS-Identifier: foo.bar.org
 Framed-Protocol: PPP}}} }
-
 *!
 !2 Set Endpoint in RADIUS Fixture Script Mode
 Host, Port and Shared Secret are the minimum set of coordinates to set a RADIUS endpoint and can be defined as shown in the following examples.
@@ -13,6 +12,7 @@ The Scenario Table definition mode is the suggested  one.
 
 !3 Row Definition
 Each endpoint coordinate has a dedicated row.
+
 |script               |radius client fixture                 |
 |set host             |${RADIUS_HOST}                        |
 |set generic port     |${RADIUS_GENERIC_PORT}                |
@@ -25,6 +25,7 @@ Each endpoint coordinate has a dedicated row.
 |check                |response       |${REQUEST}            |
 
 Also optional endpoint parameters can be defined in rows.
+
 |script               |radius client fixture                 |
 |set host             |${RADIUS_HOST}                        |
 |set generic port     |${RADIUS_GENERIC_PORT}                |
@@ -56,6 +57,7 @@ RADIUS endpoint can be defined grouping coordinates rows in ''Scenario Table''.
 
 !3 Inline Header Definition
 Table header accepts endpoint coordinates in the following order: ''hostname'', ''port'', ''shared secret''.
+
 |script               |radius client fixture|${RADIUS_HOST}|${RADIUS_GENERIC_PORT}|${RADIUS_SHARED_SECRET}|
 |set packet type      |254                                                                                |
 |set request attribute|NAS-Identifier       |with value    |foo.bar.org                                   |
@@ -65,6 +67,7 @@ Table header accepts endpoint coordinates in the following order: ''hostname'', 
 |check                |response             |${REQUEST}                                                   |
 
 Only these three main coordinates can be defined in table header. Optional endpoint parameters can be defined as shown in the Row Definition mode.
+
 |script               |radius client fixture|${RADIUS_HOST}|${RADIUS_GENERIC_PORT}|${RADIUS_SHARED_SECRET}|
 |set socket timeout   |4000                                                                               |
 |set max retry        |4                                                                                  |

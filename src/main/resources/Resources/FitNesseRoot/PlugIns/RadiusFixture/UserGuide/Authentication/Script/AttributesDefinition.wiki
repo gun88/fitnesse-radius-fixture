@@ -2,7 +2,6 @@
 Test
 ---
 !***> definitions
-
 !define REQUEST_1 { {{{Access-Request, ID 0
 User-Name: anon
 Framed-Protocol: PPP}}} }
@@ -25,15 +24,13 @@ Framed-Protocol: PPP
 User-Name: anon}}} }
 
 !define RESPONSE { {{{Access-Accept, ID 0}}} }
-
-
-
 *!
 !2 Set Attributes in RADIUS Authentication Fixture Script Mode
 In script mode, attributes can be set or removed via rows. Default attributes can also be defined by header map.
 
 !3 Row Definition
 Single value attributes can be provided by row definition.
+
 |script               |radius client fixture              |
 |load radius auth endpoint                                |
 |set request attribute|User-Name          |with value|anon|
@@ -43,6 +40,7 @@ Single value attributes can be provided by row definition.
 |check                |response           |${RESPONSE}    |
 
 To provide attributes as list, use the ''add request attribute'' method instead of ''set request attribute''.
+
 |script               |radius client fixture                  |
 |load radius auth endpoint                                    |
 |set request attribute|User-Name          |with value|anon    |
@@ -54,6 +52,7 @@ To provide attributes as list, use the ''add request attribute'' method instead 
 |check                |response           |${RESPONSE}        |
 
 To update an attribute, use ''set request attribute'' method.
+
 |script               |radius client fixture              |
 |load radius auth endpoint                                |
 |set request attribute|User-Name          |with value|anon|
@@ -66,8 +65,26 @@ To update an attribute, use ''set request attribute'' method.
 |check                |request            |${REQUEST_3}   |
 |check                |response           |${RESPONSE}    |
 
+To remove an attribute, use the ''remove request attribute'' method.
 
-To remove an attribute, set its value to ''null''.
+|script                  |radius client fixture              |
+|load radius auth endpoint                                   |
+|set request attribute   |User-Name          |with value|anon|
+|set request attribute   |Framed-Protocol    |with value|PPP |
+|check                   |send authentication|Access-Accept  |
+|check                   |request            |${REQUEST_1}   |
+|check                   |response           |${RESPONSE}    |
+|remove request attribute|Framed-Protocol                    |
+|check                   |send authentication|Access-Accept  |
+|check                   |request            |${REQUEST_4}   |
+|check                   |response           |${RESPONSE}    |
+|set request attribute   |Framed-Protocol    |with value|SLIP|
+|check                   |send authentication|Access-Accept  |
+|check                   |request            |${REQUEST_3}   |
+|check                   |response           |${RESPONSE}    |
+
+Or set its value to ''null''.
+
 |script               |radius client fixture              |
 |load radius auth endpoint                                |
 |set request attribute|User-Name          |with value|anon|
@@ -117,8 +134,8 @@ Default attributes can be set via scenario or header map.
 |check                |request            |${REQUEST_5}   |
 |check                |response           |${RESPONSE}    |
 
-
 The previous request can be also defined as the following table:
+
 |script               |radius client fixture|!{host:${RADIUS_HOST}, authPort:${RADIUS_AUTH_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, packetType:Authentication, Framed-Protocol:PPP}|
 |set request attribute|User-Name            |with value|anon                                                                                                                           |
 |check                |send authentication  |Access-Accept                                                                                                                             |
