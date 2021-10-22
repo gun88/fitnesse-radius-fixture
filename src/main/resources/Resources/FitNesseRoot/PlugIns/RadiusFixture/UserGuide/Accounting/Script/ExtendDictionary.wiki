@@ -12,32 +12,34 @@ Custom-Date: 1634311572
 Custom-Ipaddr: 1.2.3.4
 Custom-Ipv6addr: 2001:8d0:200:640b:0:0:0:1
 Custom-Ipv6prefix: 2001:8d0:200:640b:0:0:0:0/64
-Vendor-Specific: CutomVendor (3000)
+Vendor-Specific: CustomVendor (3000)
   Custom-Vendor-String: my-custom-vendor-string
-Vendor-Specific: CutomVendor (3000)
+Vendor-Specific: CustomVendor (3000)
   Custom-Vendor-Integer: 9234}}} }
 
 !define RESPONSE { {{{Accounting-Response, ID 0}}} }
 
-*!!2 Extend Dictionary in RADIUS Accounting Fixture Script Mode
+*!
+!2 Extend Dictionary in RADIUS Accounting Fixture Script Mode
 Following examples show how to extend Dictionary in RADIUS Accounting Communication. The suggested method is ''Scenario Table''.
 
 !3 Extend Dictionary in Table Header
 RADIUS Dictionary can be extended providing a custom dictionary into the table header constructor map.
-|script               |radius client fixture|!{host:${RADIUS_HOST}, acctPort:${RADIUS_ACCT_PORT}, sharedSecret:${RADIUS_SHARED_SECRET}, dictionary:${CUSTOM_DICTIONARY}}|
-|set request attribute|Acct-Status-Type     |with value|Start                                                                                                           |
-|set request attribute|Custom-String        |with value|my-custom-string                                                                                                |
-|set request attribute|Custom-Integer       |with value|1234                                                                                                            |
-|set request attribute|Custom-Octets        |with value|0x00ab00                                                                                                        |
-|set request attribute|Custom-Date          |with value|1634311572                                                                                                      |
-|set request attribute|Custom-Ipaddr        |with value|1.2.3.4                                                                                                         |
-|set request attribute|Custom-Ipv6addr      |with value|2001:8d0:200:640b:0:0:0:1                                                                                       |
-|set request attribute|Custom-Ipv6prefix    |with value|2001:8d0:200:640b:0:0:0:0/64                                                                                    |
-|set request attribute|Custom-Vendor-String |with value|my-custom-vendor-string                                                                                         |
-|set request attribute|Custom-Vendor-Integer|with value|9234                                                                                                            |
-|check                |send accounting      |Accounting-Response                                                                                                        |
-|check                |request              |${REQUEST}                                                                                                                 |
-|check                |response             |${RESPONSE}                                                                                                                |
+|script               |radius client fixture|!{dictionary:${CUSTOM_DICTIONARY}}     |
+|load radius acct endpoint                                                          |
+|set request attribute|Acct-Status-Type     |with value|Start                       |
+|set request attribute|Custom-String        |with value|my-custom-string            |
+|set request attribute|Custom-Integer       |with value|1234                        |
+|set request attribute|Custom-Octets        |with value|0x00ab00                    |
+|set request attribute|Custom-Date          |with value|1634311572                  |
+|set request attribute|Custom-Ipaddr        |with value|1.2.3.4                     |
+|set request attribute|Custom-Ipv6addr      |with value|2001:8d0:200:640b:0:0:0:1   |
+|set request attribute|Custom-Ipv6prefix    |with value|2001:8d0:200:640b:0:0:0:0/64|
+|set request attribute|Custom-Vendor-String |with value|my-custom-vendor-string     |
+|set request attribute|Custom-Vendor-Integer|with value|9234                        |
+|check                |send accounting      |Accounting-Response                    |
+|check                |request              |${REQUEST}                             |
+|check                |response             |${RESPONSE}                            |
 
 !3 Extend Dictionary in Table Row
 RADIUS Dictionary can be extended providing a custom dictionary into the ''extend dictionary'' table row.

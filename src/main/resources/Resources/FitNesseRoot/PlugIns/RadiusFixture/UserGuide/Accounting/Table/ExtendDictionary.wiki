@@ -9,7 +9,8 @@ Custom-String: fooBar}}} }
 
 !define RESPONSE { {{{Accounting-Response, ID 0}}} }
 
-*!!2 Extend Dictionary in RADIUS Accounting Fixture Table Mode
+*!
+!2 Extend Dictionary in RADIUS Accounting Fixture Table Mode
 Following examples show how to extend Dictionary in RADIUS Accounting Communication.
 
 !3 Extend Dictionary in Table Header

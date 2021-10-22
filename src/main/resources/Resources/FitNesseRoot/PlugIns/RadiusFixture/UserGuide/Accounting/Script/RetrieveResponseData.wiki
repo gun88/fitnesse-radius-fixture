@@ -11,7 +11,8 @@ Proxy-State: 0x0014
 Reply-Message: Accounting Done!
 Reply-Message: event: Start}}} }
 
-*!!2 Get Data From RADIUS Accounting Response Script Mode
+*!
+!2 Get Data From RADIUS Accounting Response Script Mode
 Following examples show how to retrieve data from responses.
 
 NOTE: RADIUS Mock Server returns customized ''Reply-Message'' when ''Callback-Id'' is set to ''simple-reply'' or ''multi-reply''.

@@ -59,15 +59,15 @@ Following example shows multiple RADIUS Authentication communication. However, f
 |set shared secret    |${RADIUS_SHARED_SECRET}                                |
 |set request attribute|Callback-Id        |with value   |dump-framed-protocol |
 |set request attribute|User-Name          |with value   |anon                 |
-|note                 |sending start packet                                   |
+|note                 |sending PPP framed protocol                            |
 |set request attribute|Framed-Protocol    |with value   |PPP                  |
 |check                |send authentication|Access-Accept                      |
 |check                |response attribute |Reply-Message|Framed-Protocol: PPP |
-|note                 |sending alive packet                                   |
+|note                 |sending SLIP framed protocol                           |
 |set request attribute|Framed-Protocol    |with value   |SLIP                 |
 |check                |send authentication|Access-Accept                      |
 |check                |response attribute |Reply-Message|Framed-Protocol: SLIP|
-|note                 |sending stop packet                                    |
+|note                 |sending ARAP framed protocol                           |
 |set request attribute|Framed-Protocol    |with value   |ARAP                 |
 |check                |send authentication|Access-Accept                      |
 |check                |response attribute |Reply-Message|Framed-Protocol: ARAP|
