@@ -4,6 +4,7 @@
 !***> definitions
 !define RADIUS_HOST {127.0.0.1}
 !define RADIUS_SHARED_SECRET {foo-bar}
+!define RADIUS_GENERIC_PORT {2888}
 !define RADIUS_ACCT_PORT {2888}
 !define RADIUS_AUTH_PORT {2889}
 !define RADIUS_SOCKET_TIMEOUT {500}
@@ -26,7 +27,7 @@ ATTRIBUTE   Custom-Ipv6prefix   207     ipv6prefix
 
 # https://www.iana.org/assignments/enterprise-numbers/enterprise-numbers
 
-VENDOR          3000    CutomVendor
+VENDOR          3000    CustomVendor
 
 VENDORATTR      3000    Custom-Vendor-String    1   string
 VENDORATTR      3000    Custom-Vendor-Integer   2   integer
@@ -44,13 +45,21 @@ VENDORATTR      3000    Custom-Vendor-Integer   2   integer
 |add user    |anon   |with password|no-password|and role|anon     |
 |show        |start server                                        |
 
+|scenario          |load radius acct endpoint|
+|set host          |${RADIUS_HOST}           |
+|set acct port     |${RADIUS_ACCT_PORT}      |
+|set shared secret |${RADIUS_SHARED_SECRET}  |
+|set socket timeout|${RADIUS_SOCKET_TIMEOUT} |
 
-|scenario         |load radius acct endpoint|
-|set host         |${RADIUS_HOST}           |
-|set acct port    |${RADIUS_ACCT_PORT}      |
-|set shared secret|${RADIUS_SHARED_SECRET}  |
+|scenario          |load radius auth endpoint|
+|set host          |${RADIUS_HOST}           |
+|set auth port     |${RADIUS_AUTH_PORT}      |
+|set shared secret |${RADIUS_SHARED_SECRET}  |
+|set socket timeout|${RADIUS_SOCKET_TIMEOUT} |
 
-|scenario         |load radius auth endpoint|
-|set host         |${RADIUS_HOST}           |
-|set auth port    |${RADIUS_AUTH_PORT}      |
-|set shared secret|${RADIUS_SHARED_SECRET}  |
+|scenario          |load radius generic endpoint|
+|set host          |${RADIUS_HOST}              |
+|set generic port  |${RADIUS_GENERIC_PORT}      |
+|set shared secret |${RADIUS_SHARED_SECRET}     |
+|set socket timeout|${RADIUS_SOCKET_TIMEOUT}    |
+

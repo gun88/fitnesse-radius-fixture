@@ -4,4 +4,7 @@ Suite
 !2 RADIUS Generic Communication
 Here is explained how to send RADIUS Generic packet. Two modes are available: ''Script Mode'' and ''Table Mode''.
 RADIUS Acceptance test (in both Table and Script mode) can be improved using ''Scenario Tables''.
+
+In most cases, examples/tests are built around a custom packetType (254), supported by the RADIUS Server Mock. This is a simple echo service.
+
 !contents -R2 -g -p -f -h
