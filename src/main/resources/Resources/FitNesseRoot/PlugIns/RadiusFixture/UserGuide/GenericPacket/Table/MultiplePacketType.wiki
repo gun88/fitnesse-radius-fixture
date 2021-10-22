@@ -1,0 +1,43 @@
+---
+Test
+---
+!***> definitions
+!define REQUEST_AUTH { {{{Access-Request, ID 0
+User-Name: anon}}} }
+
+!define RESPONSE_AUTH { {{{Access-Accept, ID 0}}} }
+
+!define REQUEST_ACCT { {{{Accounting-Request, ID 0
+Acct-Status-Type: Start}}} }
+
+!define RESPONSE_ACCT { {{{Accounting-Response, ID 0}}} }
+
+!define REQUEST_ECHO { {{{Unknown (254), ID 0
+NAS-Identifier: foo.bar.org}}} }
+
+!define RESPONSE_ECHO { {{{Unknown (254), ID 0
+NAS-Identifier: foo.bar.org}}} }
+
+*!
+!2 Multiple Packet Type in RADIUS Fixture Script Mode
+Different packet types can be sent with generic mode, included Autentication and Accounting packets.
+
+|ddt        :radius client fixture|!{host:${RADIUS_HOST}, sharedSecret:${RADIUS_SHARED_SECRET}, authPort:${RADIUS_AUTH_PORT}, acctPort:${RADIUS_ACCT_PORT},genericPort:${RADIUS_GENERIC_PORT}}|
+|packet type|User-Name            |Acct-Status-Type|NAS-Identifier|packet type name?  |request?       |response?                                                                              |
+|1          |anon                 |null            |null          |Access-Accept      |${REQUEST_AUTH}|${RESPONSE_AUTH}                                                                       |
+|4          |null                 |Start           |null          |Accounting-Response|${REQUEST_ACCT}|${RESPONSE_ACCT}                                                                       |
+|254        |null                 |null            |foo.bar.org   |Unknown (254)      |${REQUEST_ECHO}|${RESPONSE_ECHO}                                                                       |
+
+Instead of packet type integer ids, labels can be used for Authentication and Accounting packet types. Labels are case insensitive and are:
+ * auth (Authentication - id 1)
+ * authentication (Authentication - id 1)
+ * access (Authentication - id 1)
+ * acct (Accounting - id 4)
+ * accounting (Accounting - id 4)
+
+|ddt           :radius client fixture|!{host:${RADIUS_HOST}, sharedSecret:${RADIUS_SHARED_SECRET}, authPort:${RADIUS_AUTH_PORT}, acctPort:${RADIUS_ACCT_PORT},genericPort:${RADIUS_GENERIC_PORT}}|
+|packet type   |User-Name            |Acct-Status-Type|NAS-Identifier|packet type name?  |request?       |response?                                                                              |
+|Authentication|anon                 |null            |null          |Access-Accept      |${REQUEST_AUTH}|${RESPONSE_AUTH}                                                                       |
+|Accounting    |null                 |Start           |null          |Accounting-Response|${REQUEST_ACCT}|${RESPONSE_ACCT}                                                                       |
+|254           |null                 |null            |foo.bar.org   |Unknown (254)      |${REQUEST_ECHO}|${RESPONSE_ECHO}                                                                       |
+

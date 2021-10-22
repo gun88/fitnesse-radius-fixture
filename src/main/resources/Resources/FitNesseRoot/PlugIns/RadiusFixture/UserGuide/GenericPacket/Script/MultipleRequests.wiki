@@ -1,0 +1,73 @@
+---
+Test
+---
+!***> definitions
+
+!define REQUEST_0 { {{{Unknown (254), ID 0
+NAS-Identifier: foo.bar.org
+Framed-Protocol: PPP}}} }
+
+!define REQUEST_1 { {{{Unknown (254), ID 0
+NAS-Identifier: foo.bar.org}}} }
+
+!define REQUEST_2 { {{{Unknown (254), ID 0
+NAS-Identifier: foo.bar.org
+Framed-Protocol: SLIP}}} }
+
+*!
+!2 Multiple Requests in RADIUS Fixture Script Mode
+Multiple request can be sent in script mode paying attention to updete/remove attributes.
+
+|script               |radius client fixture                 |
+|load radius generic endpoint                                |
+|set packet type      |254                                   |
+|set request attribute|NAS-Identifier |with value|foo.bar.org|
+|set request attribute|Framed-Protocol|with value|PPP        |
+|check                |send packet    |Unknown (254)         |
+|check                |request        |${REQUEST_0}          |
+|check                |response       |${REQUEST_0}          |
+|set request attribute|Framed-Protocol|with value|SLIP       |
+|check                |send packet    |Unknown (254)         |
+|check                |request        |${REQUEST_2}          |
+|check                |response       |${REQUEST_2}          |
+
+!3 Remove Attribute
+To remove an attribute, provide ''null'' as value.
+|script               |radius client fixture                 |
+|load radius generic endpoint                                |
+|set packet type      |254                                   |
+|set request attribute|NAS-Identifier |with value|foo.bar.org|
+|set request attribute|Framed-Protocol|with value|PPP        |
+|check                |send packet    |Unknown (254)         |
+|check                |request        |${REQUEST_0}          |
+|check                |response       |${REQUEST_0}          |
+|set request attribute|Framed-Protocol|with value|null       |
+|check                |send packet    |Unknown (254)         |
+|check                |request        |${REQUEST_1}          |
+|check                |response       |${REQUEST_1}          |
+|set request attribute|Framed-Protocol|with value|SLIP       |
+|check                |send packet    |Unknown (254)         |
+|check                |request        |${REQUEST_2}          |
+|check                |response       |${REQUEST_2}          |
+
+!3 Multiple Generic Packets
+Following example shows multiple RADIUS communication. However, for multiple communication, table mode is suggested.
+
+|script               |radius client fixture                                       |
+|set host             |${RADIUS_HOST}                                              |
+|set generic port     |${RADIUS_GENERIC_PORT}                                      |
+|set shared secret    |${RADIUS_SHARED_SECRET}                                     |
+|set packet type      |254                                                         |
+|set request attribute|Callback-Id       |with value   |dump-nas-identifier        |
+|note                 |sending NAS-Identifier foo.bar.org                          |
+|set request attribute|NAS-Identifier    |with value   |foo.bar.org                |
+|check                |send packet       |Unknown (254)                            |
+|check                |response attribute|Reply-Message|NAS-Identifier: foo.bar.org|
+|note                 |sending NAS-Identifier zoo.bar.org                          |
+|set request attribute|NAS-Identifier    |with value   |zoo.bar.org                |
+|check                |send packet       |Unknown (254)                            |
+|check                |response attribute|Reply-Message|NAS-Identifier: zoo.bar.org|
+|note                 |sending NAS-Identifier zoo.bar.com                          |
+|set request attribute|NAS-Identifier    |with value   |zoo.bar.com                |
+|check                |send packet       |Unknown (254)                            |
+|check                |response attribute|Reply-Message|NAS-Identifier: zoo.bar.com|
