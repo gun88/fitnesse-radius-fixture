@@ -12,8 +12,8 @@ FitNesse fixture for RADIUS protocol communication - [![Maven Central](https://i
 
 
 ## Quick Start
-1. Download release file: [fitnesse-radius-fixture-1.0.0.jar](https://github.com/gun88/fitnesse-radius-fixture/releases/download/v1.0.0/fitnesse-radius-fixture-1.0.0.jar)
-2. Put `fitnesse-radius-fixture-1.0.0.jar` in the `plugins` directory (or add it to the classpath)
+1. Download release file: [fitnesse-radius-fixture-1.0.1.jar](https://github.com/gun88/fitnesse-radius-fixture/releases/download/v1.0.1/fitnesse-radius-fixture-1.0.1.jar)
+2. Put `fitnesse-radius-fixture-1.0.1.jar` in the `plugins` directory (or add it to the classpath)
 3. Run FitNesse and navigate PlugIns suite to get fitnesse-radius-fixture UserGuide and Examples
 
 *Note: As shown in [QuickStart](https://gun88.github.io/fitnesse-radius-fixture/PlugIns.RadiusFixture.UserGuide) documentation session, the plugin mode installation can be executed just placing 
@@ -81,9 +81,9 @@ WARNING: to build fitnesse-radius-fixture a dependency not available in maven re
 Two methods are available for this installation
 
  1. clone the project from [here](https://github.com/gun88/TinyRadius/tree/mod) and run `mvn install`.
- 2. [install as a third party jar](https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html) the [tinyradius-mod-1.1.0.jar](https://github.com/gun88/TinyRadius/releases/download/untagged-f61effa5a03824e6c8b3/tinyradius-mod-1.0.0.jar) available in [releases page](https://github.com/gun88/TinyRadius/releases)
+ 2. [install as a third party jar](https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html) the [tinyradius-mod-1.0.0.jar](https://github.com/gun88/TinyRadius/releases/download/untagged-f61effa5a03824e6c8b3/tinyradius-mod-1.0.0.jar) available in [releases page](https://github.com/gun88/TinyRadius/releases)
 
 
 ## Releases
-### v1.0.0 (fitnesse-radius-fixture)
- - [fitnesse-radius-fixture-1.0.0.jar](https://github.com/gun88/fitnesse-radius-fixture/releases/download/v1.0.0/fitnesse-radius-fixture-1.0.0.jar)
+### v1.0.1 (fitnesse-radius-fixture)
+ - [fitnesse-radius-fixture-1.0.1.jar](https://github.com/gun88/fitnesse-radius-fixture/releases/download/v1.0.1/fitnesse-radius-fixture-1.0.1.jar)
