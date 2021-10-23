@@ -73,6 +73,7 @@ import {RadiusTestCreationComponent} from './page/plug-ins/radius-fixture/user-g
 import {SetUpComponent} from './page/plug-ins/radius-fixture/user-guide/set-up-component';
 import {UserGuideComponent} from './page/plug-ins/radius-fixture/user-guide-component';
 import {RadiusFixtureComponent} from './page/plug-ins/radius-fixture-component';
+import {ProjectsComponent} from './component/projects/projects.component';
 
 
 @NgModule({
@@ -148,6 +149,7 @@ import {RadiusFixtureComponent} from './page/plug-ins/radius-fixture-component';
     SetUpComponent,
     UserGuideComponent,
     RadiusFixtureComponent,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,
