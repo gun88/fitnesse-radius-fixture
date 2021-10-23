@@ -214,7 +214,7 @@ public class RadiusClientPluginTest {
         new RadiusClientPlugin().registerTestRunFactories(new TestRunFactoryRegistry(context));
 
         Path mainFixturePath = Paths.get(lib.getAbsolutePath(), "fixture-0.0.0.jar");
-        Path dependencyPath = Paths.get(lib.getAbsolutePath(), "tinyradius-0.0.0.jar");
+        Path dependencyPath = Paths.get(lib.getAbsolutePath(), "tinyradius-mod-0.0.0.jar");
         assertEquals(dependencyPath.toString(), properties.getProperty("tinyRadius.jar.path"));
         assertEquals(mainFixturePath.toString(), properties.getProperty("radiusFixture.jar.path"));
     }
