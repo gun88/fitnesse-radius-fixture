@@ -75,7 +75,7 @@ public class RadiusClientPlugin implements PluginFeatureFactory {
             }
             if (RadiusClientPluginUtils.isJar(clientCodeSourceLocation)) {
                 String tinyRadiusVersion = getBundle(BUNDLE_NAME).getString("tinyRadius.version");
-                String tinyRadiusJarPath = new File(clientCodeSourceLocation.getParentFile(), ("tinyradius-" + tinyRadiusVersion + ".jar")).getAbsolutePath();
+                String tinyRadiusJarPath = new File(clientCodeSourceLocation.getParentFile(), ("tinyradius-mod-" + tinyRadiusVersion + ".jar")).getAbsolutePath();
                 context.getProperties().setProperty("tinyRadius.jar.path", tinyRadiusJarPath);
                 context.getProperties().setProperty("radiusFixture.jar.path", clientCodeSourceLocation.getAbsolutePath());
             } else {
