@@ -1,0 +1,45 @@
+.red-gradient {
+  background: rgb(82, 20, 20); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(82, 20, 20, 1) 0%, rgba(191, 0, 0, 1) 85%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(82, 20, 20, 1) 0%, rgba(191, 0, 0, 1) 85%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(82, 20, 20, 1) 0%, rgba(191, 0, 0, 1) 85%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#521414", endColorstr="#bf0000", GradientType=1); /* IE6-9 */
+}
+
+.jumbotron {
+  .jumbotron-image {
+    width: 50vw;
+    max-width: 40rem;
+    display: block;
+    margin: auto;
+  }
+
+  .lead {
+    /*margin-top: 25px;
+    margin-bottom: -25px;*/
+  }
+
+  p {
+    margin-top: 1rem;
+  }
+
+  p:last-of-type {
+    margin-bottom: -25px;
+  }
+
+  &.red-gradient .lead {
+    color: #e7e7e7;
+  }
+}
+
+a.btn {
+  width: 8.5rem;
+  margin: .5rem;
+}
+
+.blacktocat {
+  margin-top: -5px;
+  margin-right: 5px;
+}
+
+

@@ -1,0 +1,153 @@
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {NotFoundComponent} from './page/common/not-found.component';
+import {PlugInsComponent} from './page/plug-ins.component';
+import {FrontPageComponent} from './page/front-page.component';
+import {DisabledFunctionComponent} from './page/common/disabled-function.component';
+import {AccountingTableScenarioTableComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/scenario/scenario-table-component';
+import {AccountingScenarioComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/scenario-component';
+import {AccountingScriptAttributesDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/script/attributes-definition-component';
+import {AccountingScriptEndpointDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/script/endpoint-definition-component';
+import {AccountingScriptExtendDictionaryComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/script/extend-dictionary-component';
+import {AccountingScriptMultipleRequestsComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/script/multiple-requests-component';
+import {AccountingScriptRetrieveResponseDataComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/script/retrieve-response-data-component';
+import {AccountingScriptScriptComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/script-component';
+import {AccountingTableAttributesDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/table/attributes-definition-component';
+import {AccountingTableEndpointDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/table/endpoint-definition-component';
+import {AccountingTableExtendDictionaryComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/table/extend-dictionary-component';
+import {AccountingTableMultipleRequestsComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/table/multiple-requests-component';
+import {AccountingTableRetrieveResponseDataComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/table/retrieve-response-data-component';
+import {AccountingTableTableComponent} from './page/plug-ins/radius-fixture/user-guide/accounting/table-component';
+import {AccountingAccountingComponent} from './page/plug-ins/radius-fixture/user-guide/accounting-component';
+import {AuthenticationTableScenarioTableComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/scenario/scenario-table-component';
+import {AuthenticationScenarioComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/scenario-component';
+import {AuthenticationScriptAttributesDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/script/attributes-definition-component';
+import {AuthenticationScriptEndpointDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/script/endpoint-definition-component';
+import {AuthenticationScriptExtendDictionaryComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/script/extend-dictionary-component';
+import {AuthenticationScriptMultipleRequestsComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/script/multiple-requests-component';
+import {AuthenticationScriptPasswordDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/script/password-definition-component';
+import {AuthenticationScriptRetrieveResponseDataComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/script/retrieve-response-data-component';
+import {AuthenticationScriptScriptComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/script-component';
+import {AuthenticationTableAttributesDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/table/attributes-definition-component';
+import {AuthenticationTableEndpointDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/table/endpoint-definition-component';
+import {AuthenticationTableExtendDictionaryComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/table/extend-dictionary-component';
+import {AuthenticationTableMultipleRequestsComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/table/multiple-requests-component';
+import {AuthenticationTablePasswordDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/table/password-definition-component';
+import {AuthenticationTableRetrieveResponseDataComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/table/retrieve-response-data-component';
+import {AuthenticationTableTableComponent} from './page/plug-ins/radius-fixture/user-guide/authentication/table-component';
+import {AuthenticationAuthenticationComponent} from './page/plug-ins/radius-fixture/user-guide/authentication-component';
+import {GenericTableScenarioTableComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/scenario/scenario-table-component';
+import {GenericScenarioComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/scenario-component';
+import {GenericScriptAttributesDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/script/attributes-definition-component';
+import {GenericScriptEndpointDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/script/endpoint-definition-component';
+import {GenericScriptExtendDictionaryComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/script/extend-dictionary-component';
+import {GenericScriptMultiplePacketTypeComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/script/multiple-packet-type-component';
+import {GenericScriptMultipleRequestsComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/script/multiple-requests-component';
+import {GenericScriptRetrieveResponseDataComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/script/retrieve-response-data-component';
+import {GenericScriptScriptComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/script-component';
+import {GenericTableAttributesDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/table/attributes-definition-component';
+import {GenericTableEndpointDefinitionComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/table/endpoint-definition-component';
+import {GenericTableExtendDictionaryComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/table/extend-dictionary-component';
+import {GenericTableMultiplePacketTypeComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/table/multiple-packet-type-component';
+import {GenericTableMultipleRequestsComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/table/multiple-requests-component';
+import {GenericTableRetrieveResponseDataComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/table/retrieve-response-data-component';
+import {GenericTableTableComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet/table-component';
+import {GenericGenericPacketComponent} from './page/plug-ins/radius-fixture/user-guide/generic-packet-component';
+import {AutoExtractionModeComponent} from './page/plug-ins/radius-fixture/user-guide/installation/auto-extraction-mode-component';
+import {ManualModeComponent} from './page/plug-ins/radius-fixture/user-guide/installation/manual-mode-component';
+import {PluginModeComponent} from './page/plug-ins/radius-fixture/user-guide/installation/plugin-mode-component';
+import {InstallationComponent} from './page/plug-ins/radius-fixture/user-guide/installation-component';
+import {CreateYourFirstTestComponent} from './page/plug-ins/radius-fixture/user-guide/radius-test-creation/create-your-first-test-component';
+import {TableDecisionTableColumnNamesComponent} from './page/plug-ins/radius-fixture/user-guide/radius-test-creation/decision-table-column-names-component';
+import {InitializationMapKeysComponent} from './page/plug-ins/radius-fixture/user-guide/radius-test-creation/initialization-map-keys-component';
+import {RadiusTestCreationComponent} from './page/plug-ins/radius-fixture/user-guide/radius-test-creation-component';
+import {SetUpComponent} from './page/plug-ins/radius-fixture/user-guide/set-up-component';
+import {UserGuideComponent} from './page/plug-ins/radius-fixture/user-guide-component';
+import {RadiusFixtureComponent} from './page/plug-ins/radius-fixture-component';
+
+
+const routes: Routes = [
+  {path: '', redirectTo: '/FrontPage', pathMatch: 'full'},
+  {path: 'FrontPage', component: FrontPageComponent},
+  {path: 'PlugIns', component: PlugInsComponent},
+  {path: 'EditPage', component: DisabledFunctionComponent},
+  {path: 'AddPage', component: DisabledFunctionComponent},
+  {path: 'RefactorPage', component: DisabledFunctionComponent},
+  {path: 'DeletePage', component: DisabledFunctionComponent},
+  {path: 'properties', component: DisabledFunctionComponent},
+  {path: 'whereUsed', component: DisabledFunctionComponent},
+  {path: 'versions', component: DisabledFunctionComponent},
+  {path: 'search', component: DisabledFunctionComponent},
+  {path: 'files', component: DisabledFunctionComponent},
+  {path: 'ExecutionPage', component: DisabledFunctionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Scenario.ScenarioTable', component: AccountingTableScenarioTableComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Scenario', component: AccountingScenarioComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Script.AttributesDefinition', component: AccountingScriptAttributesDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Script.EndpointDefinition', component: AccountingScriptEndpointDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Script.ExtendDictionary', component: AccountingScriptExtendDictionaryComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Script.MultipleRequests', component: AccountingScriptMultipleRequestsComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Script.RetrieveResponseData', component: AccountingScriptRetrieveResponseDataComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Script', component: AccountingScriptScriptComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Table.AttributesDefinition', component: AccountingTableAttributesDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Table.EndpointDefinition', component: AccountingTableEndpointDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Table.ExtendDictionary', component: AccountingTableExtendDictionaryComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Table.MultipleRequests', component: AccountingTableMultipleRequestsComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Table.RetrieveResponseData', component: AccountingTableRetrieveResponseDataComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting.Table', component: AccountingTableTableComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Accounting', component: AccountingAccountingComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Scenario.ScenarioTable', component: AuthenticationTableScenarioTableComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Scenario', component: AuthenticationScenarioComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Script.AttributesDefinition', component: AuthenticationScriptAttributesDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Script.EndpointDefinition', component: AuthenticationScriptEndpointDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Script.ExtendDictionary', component: AuthenticationScriptExtendDictionaryComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Script.MultipleRequests', component: AuthenticationScriptMultipleRequestsComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Script.PasswordDefinition', component: AuthenticationScriptPasswordDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Script.RetrieveResponseData', component: AuthenticationScriptRetrieveResponseDataComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Script', component: AuthenticationScriptScriptComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Table.AttributesDefinition', component: AuthenticationTableAttributesDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Table.EndpointDefinition', component: AuthenticationTableEndpointDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Table.ExtendDictionary', component: AuthenticationTableExtendDictionaryComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Table.MultipleRequests', component: AuthenticationTableMultipleRequestsComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Table.PasswordDefinition', component: AuthenticationTablePasswordDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Table.RetrieveResponseData', component: AuthenticationTableRetrieveResponseDataComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication.Table', component: AuthenticationTableTableComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Authentication', component: AuthenticationAuthenticationComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Scenario.ScenarioTable', component: GenericTableScenarioTableComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Scenario', component: GenericScenarioComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Script.AttributesDefinition', component: GenericScriptAttributesDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Script.EndpointDefinition', component: GenericScriptEndpointDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Script.ExtendDictionary', component: GenericScriptExtendDictionaryComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Script.MultiplePacketType', component: GenericScriptMultiplePacketTypeComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Script.MultipleRequests', component: GenericScriptMultipleRequestsComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Script.RetrieveResponseData', component: GenericScriptRetrieveResponseDataComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Script', component: GenericScriptScriptComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Table.AttributesDefinition', component: GenericTableAttributesDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Table.EndpointDefinition', component: GenericTableEndpointDefinitionComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Table.ExtendDictionary', component: GenericTableExtendDictionaryComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Table.MultiplePacketType', component: GenericTableMultiplePacketTypeComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Table.MultipleRequests', component: GenericTableMultipleRequestsComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Table.RetrieveResponseData', component: GenericTableRetrieveResponseDataComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket.Table', component: GenericTableTableComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.GenericPacket', component: GenericGenericPacketComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Installation.AutoExtractionMode', component: AutoExtractionModeComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Installation.ManualMode', component: ManualModeComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Installation.PluginMode', component: PluginModeComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.Installation', component: InstallationComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.RadiusTestCreation.CreateYourFirstTest', component: CreateYourFirstTestComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.RadiusTestCreation.DecisionTableColumnNames', component: TableDecisionTableColumnNamesComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.RadiusTestCreation.InitializationMapKeys', component: InitializationMapKeysComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.RadiusTestCreation', component: RadiusTestCreationComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide.SetUp', component: SetUpComponent},
+  {path: 'PlugIns.RadiusFixture.UserGuide', component: UserGuideComponent},
+  {path: 'PlugIns.RadiusFixture', component: RadiusFixtureComponent},
+
+  {path: '**', component: NotFoundComponent},
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, {anchorScrolling: 'enabled'})],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {
+}
