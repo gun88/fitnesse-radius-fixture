@@ -1,7 +1,0 @@
----
-Suite
----
-!2 RADIUS Accounting Communication - Script Mode
-This mode is useful for request definition when request contains several attributes.
-
-!contents -R2 -g -p -f -h
